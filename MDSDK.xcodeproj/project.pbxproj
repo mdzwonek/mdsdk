@@ -21,11 +21,13 @@
 		48858C2D180ADFE300053CF4 /* MDSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 48858C2C180ADFE300053CF4 /* MDSDKTests.m */; };
 		48858C3C180AE06900053CF4 /* MDAnimatedDotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48858C38180AE06900053CF4 /* MDAnimatedDotsViewController.m */; };
 		48858C3D180AE06900053CF4 /* MDAnimatedDotsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48858C39180AE06900053CF4 /* MDAnimatedDotsViewController.xib */; };
-		48858C3E180AE06900053CF4 /* MDDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48858C3B180AE06900053CF4 /* MDDotView.m */; };
 		48858C42180AE07800053CF4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48858C40180AE07800053CF4 /* RootViewController.m */; };
 		48858C43180AE07800053CF4 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48858C41180AE07800053CF4 /* RootViewController.xib */; };
 		48858C47180AE09200053CF4 /* MDRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = 48858C46180AE09200053CF4 /* MDRandom.m */; };
 		48858C4C180AE0C000053CF4 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 48858C4B180AE0C000053CF4 /* UIColor+HexColor.m */; };
+		48F60F95181863A400540B8E /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F60F94181863A400540B8E /* SpriteKit.framework */; };
+		48F60F9B181863E700540B8E /* MDAnimatedDotsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F60F9A181863E700540B8E /* MDAnimatedDotsScene.m */; };
+		48F60F9E181868F400540B8E /* MDDotNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F60F9D181868F400540B8E /* MDDotNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +60,6 @@
 		48858C37180AE06900053CF4 /* MDAnimatedDotsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDAnimatedDotsViewController.h; path = Classes/AnimatedDotViews/MDAnimatedDotsViewController.h; sourceTree = "<group>"; };
 		48858C38180AE06900053CF4 /* MDAnimatedDotsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDAnimatedDotsViewController.m; path = Classes/AnimatedDotViews/MDAnimatedDotsViewController.m; sourceTree = "<group>"; };
 		48858C39180AE06900053CF4 /* MDAnimatedDotsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDAnimatedDotsViewController.xib; path = Classes/AnimatedDotViews/MDAnimatedDotsViewController.xib; sourceTree = "<group>"; };
-		48858C3A180AE06900053CF4 /* MDDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDDotView.h; path = Classes/AnimatedDotViews/MDDotView.h; sourceTree = "<group>"; };
-		48858C3B180AE06900053CF4 /* MDDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDDotView.m; path = Classes/AnimatedDotViews/MDDotView.m; sourceTree = "<group>"; };
 		48858C3F180AE07800053CF4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Classes/RootViewController.h; sourceTree = "<group>"; };
 		48858C40180AE07800053CF4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = Classes/RootViewController.m; sourceTree = "<group>"; };
 		48858C41180AE07800053CF4 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = Classes/RootViewController.xib; sourceTree = "<group>"; };
@@ -67,6 +67,11 @@
 		48858C46180AE09200053CF4 /* MDRandom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDRandom.m; path = Classes/Utils/MDRandom.m; sourceTree = "<group>"; };
 		48858C4A180AE0C000053CF4 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+HexColor.h"; path = "External libraries/Categories/UIColor+HexColor.h"; sourceTree = "<group>"; };
 		48858C4B180AE0C000053CF4 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HexColor.m"; path = "External libraries/Categories/UIColor+HexColor.m"; sourceTree = "<group>"; };
+		48F60F94181863A400540B8E /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		48F60F99181863E700540B8E /* MDAnimatedDotsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDAnimatedDotsScene.h; path = Classes/AnimatedDotViews/MDAnimatedDotsScene.h; sourceTree = "<group>"; };
+		48F60F9A181863E700540B8E /* MDAnimatedDotsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDAnimatedDotsScene.m; path = Classes/AnimatedDotViews/MDAnimatedDotsScene.m; sourceTree = "<group>"; };
+		48F60F9C181868F400540B8E /* MDDotNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDDotNode.h; path = Classes/AnimatedDotViews/MDDotNode.h; sourceTree = "<group>"; };
+		48F60F9D181868F400540B8E /* MDDotNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDDotNode.m; path = Classes/AnimatedDotViews/MDDotNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F60F95181863A400540B8E /* SpriteKit.framework in Frameworks */,
 				48858C0A180ADFE300053CF4 /* CoreGraphics.framework in Frameworks */,
 				48858C0C180ADFE300053CF4 /* UIKit.framework in Frameworks */,
 				48858C08180ADFE300053CF4 /* Foundation.framework in Frameworks */,
@@ -115,6 +121,7 @@
 		48858C06180ADFE300053CF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48F60F94181863A400540B8E /* SpriteKit.framework */,
 				48858C07180ADFE300053CF4 /* Foundation.framework */,
 				48858C09180ADFE300053CF4 /* CoreGraphics.framework */,
 				48858C0B180ADFE300053CF4 /* UIKit.framework */,
@@ -175,8 +182,10 @@
 				48858C37180AE06900053CF4 /* MDAnimatedDotsViewController.h */,
 				48858C38180AE06900053CF4 /* MDAnimatedDotsViewController.m */,
 				48858C39180AE06900053CF4 /* MDAnimatedDotsViewController.xib */,
-				48858C3A180AE06900053CF4 /* MDDotView.h */,
-				48858C3B180AE06900053CF4 /* MDDotView.m */,
+				48F60F99181863E700540B8E /* MDAnimatedDotsScene.h */,
+				48F60F9A181863E700540B8E /* MDAnimatedDotsScene.m */,
+				48F60F9C181868F400540B8E /* MDDotNode.h */,
+				48F60F9D181868F400540B8E /* MDDotNode.m */,
 			);
 			name = AnimatedDotViews;
 			sourceTree = "<group>";
@@ -306,11 +315,12 @@
 			files = (
 				48858C4C180AE0C000053CF4 /* UIColor+HexColor.m in Sources */,
 				48858C18180ADFE300053CF4 /* AppDelegate.m in Sources */,
-				48858C3E180AE06900053CF4 /* MDDotView.m in Sources */,
 				48858C3C180AE06900053CF4 /* MDAnimatedDotsViewController.m in Sources */,
 				48858C14180ADFE300053CF4 /* main.m in Sources */,
+				48F60F9E181868F400540B8E /* MDDotNode.m in Sources */,
 				48858C42180AE07800053CF4 /* RootViewController.m in Sources */,
 				48858C47180AE09200053CF4 /* MDRandom.m in Sources */,
+				48F60F9B181863E700540B8E /* MDAnimatedDotsScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +442,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
 				INFOPLIST_FILE = "MDSDK/MDSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -445,7 +457,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
 				INFOPLIST_FILE = "MDSDK/MDSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

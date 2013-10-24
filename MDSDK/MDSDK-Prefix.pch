@@ -14,3 +14,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define UIOffsetAdd(firstOffset, secondOffset) UIOffsetMake(firstOffset.horizontal + secondOffset.horizontal, firstOffset.vertical + secondOffset.vertical)
+#define UIOffsetMultiply(offset, multiplier) UIOffsetMake(multiplier * offset.horizontal, multiplier * offset.vertical)
+#define UIOffsetSubstract(firstOffset, secondOffset) UIOffsetAdd(firstOffset, UIOffsetMultiply(secondOffset, -1.0f))
