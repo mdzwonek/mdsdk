@@ -10,4 +10,7 @@
 
 @interface RootViewController : UIViewController
 
+@property (nonatomic, copy) void (^didTapLeftMenuButtonBlock)();
+@property (nonatomic, copy) void (^didTapRightMenuButtonBlock)();
+
 @end

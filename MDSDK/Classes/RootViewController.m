@@ -2,22 +2,31 @@
 //  RootViewController.m
 //  MDSDK
 //
-//  Created by Mateusz Dzwonek on 14/09/2013.
+//  Created by Mateusz Dzwonek on 12/11/2013.
 //  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
 #import "RootViewController.h"
-#import "MDAnimatedDotsViewController.h"
-#import "MDRandom.h"
+
+@interface RootViewController ()
+
+- (IBAction)didTapLeftMenuButton:(id)sender;
+- (IBAction)didTapRightMenuButton:(id)sender;
+
+@end
 
 @implementation RootViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    MDAnimatedDotsViewController *animatedDotsViewController = [[MDAnimatedDotsViewController alloc] init];
-    [self addChildViewController:animatedDotsViewController];
-    animatedDotsViewController.view.frame = self.view.bounds;
-    [self.view addSubview:animatedDotsViewController.view];
+- (IBAction)didTapLeftMenuButton:(id)sender {
+    if (self.didTapLeftMenuButtonBlock) {
+        self.didTapLeftMenuButtonBlock();
+    }
+}
+
+- (IBAction)didTapRightMenuButton:(id)sender {
+    if (self.didTapRightMenuButtonBlock) {
+        self.didTapRightMenuButtonBlock();
+    }
 }
 
 @end

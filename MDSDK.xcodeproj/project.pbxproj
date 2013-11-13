@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4814D70D1832F538002C775A /* button_reveal_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4814D70B1832F538002C775A /* button_reveal_menu.png */; };
+		4814D70E1832F538002C775A /* button_reveal_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4814D70C1832F538002C775A /* button_reveal_menu@2x.png */; };
+		4831AD6C1819C4C000B4487A /* MDSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4831AD6A1819C4C000B4487A /* MDSideMenuViewController.m */; };
+		4831AD6D1819C4C000B4487A /* MDSideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4831AD6B1819C4C000B4487A /* MDSideMenuViewController.xib */; };
+		4872CC291823098000CD8462 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4872CC281823098000CD8462 /* QuartzCore.framework */; };
 		48858C08180ADFE300053CF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48858C07180ADFE300053CF4 /* Foundation.framework */; };
 		48858C0A180ADFE300053CF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48858C09180ADFE300053CF4 /* CoreGraphics.framework */; };
 		48858C0C180ADFE300053CF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48858C0B180ADFE300053CF4 /* UIKit.framework */; };
@@ -41,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4814D70B1832F538002C775A /* button_reveal_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_reveal_menu.png; sourceTree = "<group>"; };
+		4814D70C1832F538002C775A /* button_reveal_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_reveal_menu@2x.png"; sourceTree = "<group>"; };
+		4831AD691819C4C000B4487A /* MDSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSideMenuViewController.h; path = Classes/SideMenuViewController/MDSideMenuViewController.h; sourceTree = "<group>"; };
+		4831AD6A1819C4C000B4487A /* MDSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSideMenuViewController.m; path = Classes/SideMenuViewController/MDSideMenuViewController.m; sourceTree = "<group>"; };
+		4831AD6B1819C4C000B4487A /* MDSideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSideMenuViewController.xib; path = Classes/SideMenuViewController/MDSideMenuViewController.xib; sourceTree = "<group>"; };
+		4872CC281823098000CD8462 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		48858C04180ADFE300053CF4 /* MDSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48858C07180ADFE300053CF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		48858C09180ADFE300053CF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -79,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4872CC291823098000CD8462 /* QuartzCore.framework in Frameworks */,
 				48F60F95181863A400540B8E /* SpriteKit.framework in Frameworks */,
 				48858C0A180ADFE300053CF4 /* CoreGraphics.framework in Frameworks */,
 				48858C0C180ADFE300053CF4 /* UIKit.framework in Frameworks */,
@@ -99,6 +111,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4814D7091832F538002C775A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4814D70A1832F538002C775A /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4814D70A1832F538002C775A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4814D70B1832F538002C775A /* button_reveal_menu.png */,
+				4814D70C1832F538002C775A /* button_reveal_menu@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		4831AD681819C45100B4487A /* SideMenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4831AD691819C4C000B4487A /* MDSideMenuViewController.h */,
+				4831AD6A1819C4C000B4487A /* MDSideMenuViewController.m */,
+				4831AD6B1819C4C000B4487A /* MDSideMenuViewController.xib */,
+			);
+			name = SideMenuViewController;
+			sourceTree = "<group>";
+		};
 		48858BFB180ADFE300053CF4 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +160,7 @@
 		48858C06180ADFE300053CF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4872CC281823098000CD8462 /* QuartzCore.framework */,
 				48F60F94181863A400540B8E /* SpriteKit.framework */,
 				48858C07180ADFE300053CF4 /* Foundation.framework */,
 				48858C09180ADFE300053CF4 /* CoreGraphics.framework */,
@@ -138,9 +178,11 @@
 				48858C3F180AE07800053CF4 /* RootViewController.h */,
 				48858C40180AE07800053CF4 /* RootViewController.m */,
 				48858C41180AE07800053CF4 /* RootViewController.xib */,
-				48858C19180ADFE300053CF4 /* Images.xcassets */,
+				4831AD681819C45100B4487A /* SideMenuViewController */,
 				48858C36180AE04F00053CF4 /* AnimatedDotViews */,
 				48858C44180AE08A00053CF4 /* Utils */,
+				4814D7091832F538002C775A /* Resources */,
+				48858C19180ADFE300053CF4 /* Images.xcassets */,
 				48858C48180AE0A900053CF4 /* External libraries */,
 				48858C0E180ADFE300053CF4 /* Supporting Files */,
 			);
@@ -291,10 +333,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4831AD6D1819C4C000B4487A /* MDSideMenuViewController.xib in Resources */,
 				48858C12180ADFE300053CF4 /* InfoPlist.strings in Resources */,
 				48858C3D180AE06900053CF4 /* MDAnimatedDotsViewController.xib in Resources */,
 				48858C43180AE07800053CF4 /* RootViewController.xib in Resources */,
 				48858C1A180ADFE300053CF4 /* Images.xcassets in Resources */,
+				4814D70D1832F538002C775A /* button_reveal_menu.png in Resources */,
+				4814D70E1832F538002C775A /* button_reveal_menu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +366,7 @@
 				48858C42180AE07800053CF4 /* RootViewController.m in Sources */,
 				48858C47180AE09200053CF4 /* MDRandom.m in Sources */,
 				48F60F9B181863E700540B8E /* MDAnimatedDotsScene.m in Sources */,
+				4831AD6C1819C4C000B4487A /* MDSideMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
