@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface RootViewController : UIViewController
 
 @property (nonatomic, copy) void (^didTapLeftMenuButtonBlock)();

@@ -7,7 +7,6 @@
 //
 
 #import "MDAnimatedDotsViewController.h"
-#import <SpriteKit/SpriteKit.h>
 #import "MDAnimatedDotsScene.h"
 
 @interface MDAnimatedDotsViewController ()
