@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface MDRandom : NSObject
 
 + (int)randomInt:(int)number;

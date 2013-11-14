@@ -1,18 +1,18 @@
 //
-//  MDSDKTests.m
-//  MDSDKTests
+//  MDSDK_ExampleTests.m
+//  MDSDK_ExampleTests
 //
-//  Created by Mateusz Dzwonek on 13/10/2013.
+//  Created by Mateusz Dzwonek on 14/11/2013.
 //  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface MDSDKTests : XCTestCase
+@interface MDSDK_ExampleTests : XCTestCase
 
 @end
 
-@implementation MDSDKTests
+@implementation MDSDK_ExampleTests
 
 - (void)setUp
 {

@@ -1,8 +1,8 @@
 //
 //  main.m
-//  MDSDK
+//  MDSDK_Example
 //
-//  Created by Mateusz Dzwonek on 13/10/2013.
+//  Created by Mateusz Dzwonek on 14/11/2013.
 //  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 

@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MDAnimatedDotsViewController.h"
-#import "MDSideMenuViewController.h"
+#import "MDSDK.h"
 #import "RootViewController.h"
 
 static const CGFloat CORNER_RADIUS = 3.0f;
