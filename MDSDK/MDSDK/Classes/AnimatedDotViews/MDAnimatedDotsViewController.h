@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
+@class MDAnimatedDotsScene;
+
 @interface MDAnimatedDotsViewController : UIViewController
+
+@property (nonatomic, strong, readonly) MDAnimatedDotsScene *dotsScene;
 
 @end

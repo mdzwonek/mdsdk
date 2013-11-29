@@ -17,6 +17,7 @@ static const CGFloat CORNER_RADIUS = 3.0f;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     UIViewController *rootVC = [[UIViewController alloc] init];
     self.window.rootViewController = rootVC;
@@ -49,6 +50,8 @@ static const CGFloat CORNER_RADIUS = 3.0f;
         [sideMenuVC toggleRightMenu];
     };
     
+    // move content below status bar
+    // TODO do it for menus too
     CGRect frame = contentVC.view.frame;
     frame.origin.y += 22.0f;
     frame.size.height -= 2.0f * 22.0f;

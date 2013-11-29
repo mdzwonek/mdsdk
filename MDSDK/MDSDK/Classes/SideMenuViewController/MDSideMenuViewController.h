@@ -20,6 +20,12 @@ extern const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE;
 
 @interface MDSideMenuViewController : UIViewController
 
+// TODO create private method '- (void)updateMenu:(UIView *)menu withRevealPercentage:(double)percentage'
+
+// TODO create block which will allow to create custom animations for left and right menu containers
+// TODO consider making left and right menu containers public - there will be access to them anyway
+// TODO remove isPanningMenuBlock
+
 @property (nonatomic, readonly) UIViewController *leftMenuViewController;
 @property (nonatomic, readonly) UIViewController *rightMenuViewController;
 @property (nonatomic, readonly) UIViewController *contentViewController;
@@ -35,7 +41,6 @@ extern const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE;
 @property (nonatomic, assign) CGFloat maxContentTranslation;
 @property (nonatomic, assign) CGFloat minMenuScale;
 @property (nonatomic, assign) CGFloat maxMenuScale;
-
 
 @property (nonatomic, copy) void (^didToggleLeftMenuBlock)(MDSideMenuViewController *sideMenuVC);
 @property (nonatomic, copy) void (^didToggleRightMenuBlock)(MDSideMenuViewController *sideMenuVC);
