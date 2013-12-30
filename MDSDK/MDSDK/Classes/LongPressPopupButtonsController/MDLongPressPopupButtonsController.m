@@ -3,18 +3,19 @@
 //  MDSDK
 //
 //  Created by Mateusz Dzwonek on 21/11/2013.
-//  Copyright (c) 2013 Reason. All rights reserved.
+//  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
 #import "MDLongPressPopupButtonsController.h"
 
+
 static const NSTimeInterval MDDefaultMinimumPressDuration = 0.3;
 
-static const CGFloat MDDefaultDistanceBetweenPopupButtonAndIndicator = 100.0f;
-static const CGFloat MDDefaultAngleBetweenPopupButton = 45.0f;
-static const CGFloat MDDefaultAngleBetweenIndicatorAndCenterOfPopupButtons = -45.0f;
+static const NSTimeInterval MDDefaultAnimationDuration = 0.3;
 
-static const NSTimeInterval MDAnimationDuration = 0.3;
+static const CGFloat MDDefaultDistanceBetweenPopupButtonAndIndicator = 100.0f;
+static const CGFloat MDDefaultAngleBetweenPopupButtons = 45.0f;
+static const CGFloat MDDefaultAngleBetweenIndicatorAndCenterOfPopupButtons = -45.0f;
 
 
 @interface MDLongPressPopupButtonsController ()
@@ -41,10 +42,10 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
 - (void)showButtons;
 - (CGFloat)calculateAngleForFirstPopupButton;
 - (CGRect)rectForPopupButton:(UIView *)popupButton atAngleFromCenter:(CGFloat)angle;
-- (void)hideButtons;
+- (void)hideButtonsWithSelectedButton:(UIView *)popupButton;
 
-- (void)setTouchIndicatorHighlighted:(BOOL)highlighted;
-- (void)popupButton:(UIView *)popupButton setHighlighted:(BOOL)highlighted;
+- (void)setTouchIndicatorHighlighted:(BOOL)highlighted animated:(BOOL)animated;
+- (void)popupButton:(UIView *)popupButton setHighlighted:(BOOL)highlighted animated:(BOOL)animated;
 
 @end
 
@@ -74,8 +75,9 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
     self.mutablePopupButtons = [[NSMutableArray alloc] init];
     self.popupButtonHighlightedFlags = [[NSMutableDictionary alloc] init];
     self.minimumPressDuration = MDDefaultMinimumPressDuration;
+    self.animationsDuration = MDDefaultAnimationDuration;
     self.distanceBetweenPopupButtonAndIndicator = MDDefaultDistanceBetweenPopupButtonAndIndicator;
-    self.angleBetweenPopupButtons = MDDefaultAngleBetweenPopupButton;
+    self.angleBetweenPopupButtons = MDDefaultAngleBetweenPopupButtons;
     self.angleBetweenIndicatorAndCenterOfPopupButtons = MDDefaultAngleBetweenIndicatorAndCenterOfPopupButtons;
 }
 
@@ -93,9 +95,19 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
     [self.mutablePopupButtons addObject:popupButton];
 }
 
+- (void)insertPopupButton:(UIView *)popupButton atIndex:(NSInteger)index {
+    NSAssert(!self.isVisible, @"Method 'insertPopupButton:atIndex:' can be called only when constroller is not diplaying buttons");
+    [self.mutablePopupButtons insertObject:popupButton atIndex:index];
+}
+
 - (void)removePopupButton:(UIView *)popupButton {
     NSAssert(!self.isVisible, @"Method 'removePopupButton:' can be called only when constroller is not diplaying buttons");
     [self.mutablePopupButtons removeObject:popupButton];
+}
+
+- (void)removePopupButtonAtIndex:(NSInteger)index {
+    NSAssert(!self.isVisible, @"Method 'removePopupButtonFromIndex:' can be called only when constroller is not diplaying buttons");
+    [self.mutablePopupButtons removeObjectAtIndex:index];
 }
 
 - (void)addToView:(UIView *)view {
@@ -110,19 +122,19 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
 
 - (void)longPressGestureRecognized:(UILongPressGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
+        if (self.willBeVisible) self.willBeVisible();
         self.visible = YES;
         self.centralPoint = [recognizer locationInView:recognizer.view];
         [self showButtons];
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        BOOL isAnyPopupButtonHighlighted = NO;
         for (UIView *popupButton in self.popupButtons) {
-            BOOL popupButtonShouldBeHighlighted = [self locationOfRecognizer:recognizer isInView:popupButton];
-            [self popupButton:popupButton setHighlighted:popupButtonShouldBeHighlighted];
-            if (popupButtonShouldBeHighlighted) {
-                break;
-            }
+            BOOL popupButtonShouldBeHighlighted = !isAnyPopupButtonHighlighted && [self locationOfRecognizer:recognizer isInView:popupButton];
+            [self popupButton:popupButton setHighlighted:popupButtonShouldBeHighlighted animated:YES];
+            isAnyPopupButtonHighlighted |= popupButtonShouldBeHighlighted;
         }
         BOOL touchIndicatorShouldBeHighlighted = [self locationOfRecognizer:recognizer isInView:self.touchIndicatorView];
-        [self setTouchIndicatorHighlighted:touchIndicatorShouldBeHighlighted];
+        [self setTouchIndicatorHighlighted:touchIndicatorShouldBeHighlighted animated:YES];
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         UIView *selectedPopupButton = nil;
         for (UIView *popupButton in self.popupButtons) {
@@ -133,7 +145,7 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
         }
         if (self.didFinishWithButton) self.didFinishWithButton(selectedPopupButton);
         self.visible = NO;
-        [self hideButtons];
+        [self hideButtonsWithSelectedButton:selectedPopupButton];
     }
 }
 
@@ -143,28 +155,36 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
 }
 
 - (void)showButtons {
+    CGFloat angleOfFirstPopupButton = [self calculateAngleForFirstPopupButton];
+    for (NSInteger i = 0; i < self.popupButtons.count; i++) {
+        UIView *popupButton = [self.popupButtons objectAtIndex:i];
+        popupButton.center = self.centralPoint;
+        [self popupButton:popupButton setHighlighted:NO animated:NO];
+    }
+    self.touchIndicatorView.center = self.centralPoint;
+    [self setTouchIndicatorHighlighted:YES animated:NO];
+
     NSMutableArray *allViewsToShow = [[NSMutableArray alloc] initWithArray:self.popupButtons];
-    [allViewsToShow addObject:self.touchIndicatorView];
+    if (self.touchIndicatorView) {
+        [allViewsToShow addObject:self.touchIndicatorView];
+    }
     for (UIView *viewToShow in allViewsToShow) {
         viewToShow.alpha = 0.0f;
         [self.superview addSubview:viewToShow];
     }
-    
-    CGFloat angleOfFirstPopupButton = [self calculateAngleForFirstPopupButton];
-    for (NSInteger i = 0; i < self.popupButtons.count; i++) {
-        UIView *popupButton = [self.popupButtons objectAtIndex:i];
-        CGFloat angle = angleOfFirstPopupButton + i * self.angleBetweenPopupButtons;
-        popupButton.frame = [self rectForPopupButton:popupButton atAngleFromCenter:angle];
-        [self popupButton:popupButton setHighlighted:NO];
-    }
-    self.touchIndicatorView.center = self.centralPoint;
-    [self setTouchIndicatorHighlighted:YES];
-
-    [UIView animateWithDuration:MDAnimationDuration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        for (UIView *viewToShow in allViewsToShow) {
-            viewToShow.alpha = 1.0f;
-        }
-    } completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseOut;
+        [UIView animateWithDuration:self.animationsDuration delay:0.0 options:options animations:^{
+            for (NSInteger i = 0; i < self.popupButtons.count; i++) {
+                UIView *popupButton = [self.popupButtons objectAtIndex:i];
+                CGFloat angle = angleOfFirstPopupButton + i * self.angleBetweenPopupButtons;
+                popupButton.frame = [self rectForPopupButton:popupButton atAngleFromCenter:angle];
+            }
+            for (UIView *viewToShow in allViewsToShow) {
+                viewToShow.alpha = 1.0f;
+            }
+        } completion:nil];
+    });
 }
 
 - (CGFloat)calculateAngleForFirstPopupButton {
@@ -185,7 +205,7 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
             return potentialAngle;
         }
         potentialAngle += 10.0f;
-    } while (potentialAngle != angle);
+    } while (potentialAngle != angle + 360.0f);
     return angle;
 }
 
@@ -199,27 +219,36 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
     return CGRectMake(popupCetralPoint.x - width / 2.0f, popupCetralPoint.y - height / 2.0f, width, height);
 }
 
-- (void)hideButtons {
+- (void)hideButtonsWithSelectedButton:(UIView *)selectedButton {
     NSMutableArray *allViewsToShow = [[NSMutableArray alloc] initWithArray:self.popupButtons];
-    [allViewsToShow addObject:self.touchIndicatorView];
-    
-    for (UIView *popupButton in self.popupButtons) {
-        [self popupButton:popupButton setHighlighted:NO];
+    if (self.touchIndicatorView) {
+        [allViewsToShow addObject:self.touchIndicatorView];
     }
-    [self setTouchIndicatorHighlighted:NO];
     
-    [UIView animateWithDuration:MDAnimationDuration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseOut;
+    [UIView animateWithDuration:self.animationsDuration delay:0.0 options:options animations:^{
+        for (NSInteger i = 0; i < self.popupButtons.count; i++) {
+            UIView *popupButton = [self.popupButtons objectAtIndex:i];
+            if (popupButton != selectedButton) {
+                popupButton.center = self.centralPoint;
+            }
+        }
         for (UIView *viewToShow in allViewsToShow) {
             viewToShow.alpha = 0.0f;
         }
     } completion:^(BOOL finished) {
+        for (UIView *popupButton in self.popupButtons) {
+            [self popupButton:popupButton setHighlighted:NO animated:NO];
+        }
+        [self setTouchIndicatorHighlighted:NO animated:NO];
+        
         for (UIView *viewToShow in allViewsToShow) {
             [viewToShow removeFromSuperview];
         }
     }];
 }
 
-- (void)setTouchIndicatorHighlighted:(BOOL)highlighted {
+- (void)setTouchIndicatorHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     if (self.isTouchIndicatorHighlighted == highlighted) {
         return;
     }
@@ -228,14 +257,14 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
  
     _touchIndicatorHighlighted = highlighted;
     
-    [UIView animateWithDuration:MDAnimationDuration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:(animated ? self.animationsDuration : 0.0f) delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         if (self.touchIndicatorHighlightedStateChangeAnimations) self.touchIndicatorHighlightedStateChangeAnimations(self.touchIndicatorView, highlighted);
     } completion:^(BOOL finished) {
         if (self.touchIndicatorDidChangeHighlightedState) self.touchIndicatorDidChangeHighlightedState(self.touchIndicatorView, highlighted);
     }];
 }
 
-- (void)popupButton:(UIView *)popupButton setHighlighted:(BOOL)highlighted {
+- (void)popupButton:(UIView *)popupButton setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     BOOL wasDisplayedBefore = [self.popupButtonHighlightedFlags.allKeys containsObject:@(popupButton.hash)];
     BOOL isPopupButtonHighlighted = [[self.popupButtonHighlightedFlags objectForKey:@(popupButton.hash)] boolValue];
     if (wasDisplayedBefore && isPopupButtonHighlighted == highlighted) {
@@ -246,7 +275,7 @@ static const NSTimeInterval MDAnimationDuration = 0.3;
     
     [self.popupButtonHighlightedFlags setObject:@(highlighted) forKey:@(popupButton.hash)];
     
-    [UIView animateWithDuration:MDAnimationDuration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:(animated ? self.animationsDuration : 0.0f) delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         if (self.popupButtonHighlightedStateChangeAnimations) self.popupButtonHighlightedStateChangeAnimations(popupButton, highlighted);
     } completion:^(BOOL finished) {
         if (self.popupButtonDidChangeHighlightedState) self.popupButtonDidChangeHighlightedState(popupButton, highlighted);

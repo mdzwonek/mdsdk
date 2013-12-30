@@ -12,6 +12,12 @@
 
 static const CGFloat CORNER_RADIUS = 3.0f;
 
+@interface AppDelegate ()
+
+@property (nonatomic) MDPopupButtonsController *controller;
+
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -56,6 +62,18 @@ static const CGFloat CORNER_RADIUS = 3.0f;
     frame.origin.y += 22.0f;
     frame.size.height -= 2.0f * 22.0f;
     contentVC.view.frame = frame;
+    
+    self.controller = [[MDPopupButtonsController alloc] init];
+    NSArray *texts = @[@"camera", @"edit", @"gallery", @"share"];
+    NSArray *imageNames = @[@"button_camera", @"button_edit", @"button_gallery", @"button_share"];
+    for (NSInteger i = 0; i < imageNames.count && texts.count; i++) {
+        UIImage *image = [UIImage imageNamed:[imageNames objectAtIndex:i]];
+        [self.controller addPopupButtonWithImage:image andText:[texts objectAtIndex:i]];
+    }
+    self.controller.didFinishWithPopupButtonWithText = ^(NSString *text) {
+        NSLog(@"Did choose '%@'", text);
+    };
+    [self.controller addToView:leftMenuVC.view];
     
     [self.window makeKeyAndVisible];
     

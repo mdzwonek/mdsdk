@@ -3,15 +3,17 @@
 //  MDSDK
 //
 //  Created by Mateusz Dzwonek on 21/11/2013.
-//  Copyright (c) 2013 Reason. All rights reserved.
+//  Copyright (c) 2013 Mateusz Dzwonek. All rights reserved.
 //
 
+typedef void (^MDEmptyBlock)();
 typedef void (^MDPopupButtonBlock)(UIView *view);
 typedef void (^MDPopupButtonHighlighedBlock)(UIView *view, BOOL highlighted);
 
 @interface MDLongPressPopupButtonsController : NSObject
 
 @property (nonatomic) NSTimeInterval minimumPressDuration;
+@property (nonatomic) NSTimeInterval animationsDuration;
 
 @property (nonatomic, readonly) UIView *superview;
 
@@ -32,12 +34,15 @@ typedef void (^MDPopupButtonHighlighedBlock)(UIView *view, BOOL highlighted);
 @property (nonatomic, copy) MDPopupButtonHighlighedBlock popupButtonHighlightedStateChangeAnimations;
 @property (nonatomic, copy) MDPopupButtonHighlighedBlock popupButtonDidChangeHighlightedState;
 
+@property (nonatomic, copy) MDEmptyBlock willBeVisible;
 @property (nonatomic, copy) MDPopupButtonBlock didFinishWithButton;
 
 - (instancetype)initWithButtons:(NSArray *)buttons;
 
 - (void)addPopupButton:(UIView *)popupButton;
+- (void)insertPopupButton:(UIView *)popupButton atIndex:(NSInteger)index;
 - (void)removePopupButton:(UIView *)popupButton;
+- (void)removePopupButtonAtIndex:(NSInteger)index;
 
 - (void)addToView:(UIView *)view;
 

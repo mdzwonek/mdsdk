@@ -1,6 +1,6 @@
 //
 //  UIColor+HexColor.m
-//  DailyDigest_mock
+//  MDSDK
 //
 //  Created by Mateusz Dzwonek on 15/03/2013.
 //

@@ -29,6 +29,14 @@
 		4812FE67183589EF0036749C /* button_reveal_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE5D183589C10036749C /* button_reveal_menu.png */; };
 		4812FE68183589EF0036749C /* button_reveal_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE5E183589C10036749C /* button_reveal_menu@2x.png */; };
 		4812FE6918358A0B0036749C /* MDSideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE60183589C10036749C /* MDSideMenuViewController.xib */; };
+		4832EAED186A2DD00075068A /* button_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832EAEB186A2DD00075068A /* button_edit.png */; };
+		4832EAEE186A2DD00075068A /* button_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832EAEC186A2DD00075068A /* button_edit@2x.png */; };
+		4832F0D7186A26DD002AA665 /* button_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832F0CF186A26DD002AA665 /* button_camera.png */; };
+		4832F0D8186A26DD002AA665 /* button_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832F0D0186A26DD002AA665 /* button_camera@2x.png */; };
+		4832F0D9186A26DD002AA665 /* button_gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832F0D1186A26DD002AA665 /* button_gallery.png */; };
+		4832F0DA186A26DD002AA665 /* button_gallery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832F0D2186A26DD002AA665 /* button_gallery@2x.png */; };
+		4832F0DD186A26DD002AA665 /* button_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832F0D5186A26DD002AA665 /* button_share.png */; };
+		4832F0DE186A26DD002AA665 /* button_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4832F0D6186A26DD002AA665 /* button_share@2x.png */; };
 		48C58B101835902800C6AB23 /* MDAnimatedDotsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48C58B0F1835902800C6AB23 /* MDAnimatedDotsViewController.xib */; };
 		48C58B111835902800C6AB23 /* MDAnimatedDotsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48C58B0F1835902800C6AB23 /* MDAnimatedDotsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -83,6 +91,14 @@
 		4812FE5D183589C10036749C /* button_reveal_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_reveal_menu.png; sourceTree = "<group>"; };
 		4812FE5E183589C10036749C /* button_reveal_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_reveal_menu@2x.png"; sourceTree = "<group>"; };
 		4812FE60183589C10036749C /* MDSideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDSideMenuViewController.xib; sourceTree = "<group>"; };
+		4832EAEB186A2DD00075068A /* button_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_edit.png; sourceTree = "<group>"; };
+		4832EAEC186A2DD00075068A /* button_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_edit@2x.png"; sourceTree = "<group>"; };
+		4832F0CF186A26DD002AA665 /* button_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_camera.png; sourceTree = "<group>"; };
+		4832F0D0186A26DD002AA665 /* button_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_camera@2x.png"; sourceTree = "<group>"; };
+		4832F0D1186A26DD002AA665 /* button_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_gallery.png; sourceTree = "<group>"; };
+		4832F0D2186A26DD002AA665 /* button_gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gallery@2x.png"; sourceTree = "<group>"; };
+		4832F0D5186A26DD002AA665 /* button_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_share.png; sourceTree = "<group>"; };
+		4832F0D6186A26DD002AA665 /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
 		48C58B0F1835902800C6AB23 /* MDAnimatedDotsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDAnimatedDotsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -235,6 +251,14 @@
 			children = (
 				4812FE5D183589C10036749C /* button_reveal_menu.png */,
 				4812FE5E183589C10036749C /* button_reveal_menu@2x.png */,
+				4832F0CF186A26DD002AA665 /* button_camera.png */,
+				4832F0D0186A26DD002AA665 /* button_camera@2x.png */,
+				4832EAEB186A2DD00075068A /* button_edit.png */,
+				4832EAEC186A2DD00075068A /* button_edit@2x.png */,
+				4832F0D1186A26DD002AA665 /* button_gallery.png */,
+				4832F0D2186A26DD002AA665 /* button_gallery@2x.png */,
+				4832F0D5186A26DD002AA665 /* button_share.png */,
+				4832F0D6186A26DD002AA665 /* button_share@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -372,13 +396,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4832F0D8186A26DD002AA665 /* button_camera@2x.png in Resources */,
+				4832F0DD186A26DD002AA665 /* button_share.png in Resources */,
+				4832F0D7186A26DD002AA665 /* button_camera.png in Resources */,
+				4832EAEE186A2DD00075068A /* button_edit@2x.png in Resources */,
 				4812FE15183584490036749C /* InfoPlist.strings in Resources */,
 				4812FE1D183584490036749C /* Images.xcassets in Resources */,
 				4812FE40183584780036749C /* RootViewController.xib in Resources */,
 				48C58B101835902800C6AB23 /* MDAnimatedDotsViewController.xib in Resources */,
 				4812FE64183589C10036749C /* button_reveal_menu.png in Resources */,
+				4832F0DE186A26DD002AA665 /* button_share@2x.png in Resources */,
 				4812FE65183589C10036749C /* button_reveal_menu@2x.png in Resources */,
+				4832F0D9186A26DD002AA665 /* button_gallery.png in Resources */,
+				4832EAED186A2DD00075068A /* button_edit.png in Resources */,
 				4812FE66183589C10036749C /* MDSideMenuViewController.xib in Resources */,
+				4832F0DA186A26DD002AA665 /* button_gallery@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

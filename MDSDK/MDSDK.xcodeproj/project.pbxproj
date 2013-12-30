@@ -24,9 +24,10 @@
 		4812FDEC183582410036749C /* MDRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDE0183582410036749C /* MDRandom.m */; };
 		4812FDF11835824A0036749C /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDF01835824A0036749C /* UIColor+HexColor.m */; };
 		4812FDF21835824A0036749C /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDF01835824A0036749C /* UIColor+HexColor.m */; };
-		4812FE581835898F0036749C /* button_reveal_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE531835898F0036749C /* button_reveal_menu.png */; };
-		4812FE591835898F0036749C /* button_reveal_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE541835898F0036749C /* button_reveal_menu@2x.png */; };
 		4812FE5A1835898F0036749C /* MDSideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE571835898F0036749C /* MDSideMenuViewController.xib */; };
+		4832EAF2186A2EA80075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
+		4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
+		4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */; };
 		487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */; };
 		48C58B0D1835901A00C6AB23 /* MDAnimatedDotsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48C58B0C1835901A00C6AB23 /* MDAnimatedDotsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,18 @@
 		4812FE531835898F0036749C /* button_reveal_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_reveal_menu.png; sourceTree = "<group>"; };
 		4812FE541835898F0036749C /* button_reveal_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_reveal_menu@2x.png"; sourceTree = "<group>"; };
 		4812FE571835898F0036749C /* MDSideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDSideMenuViewController.xib; sourceTree = "<group>"; };
+		4832EAF0186A2EA80075068A /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "Classes/UIImage+Tint.h"; sourceTree = "<group>"; };
+		4832EAF1186A2EA80075068A /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "Classes/UIImage+Tint.m"; sourceTree = "<group>"; };
+		4832F0BC186A23D0002AA665 /* MDPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDPopupButtonsController.h; path = LongPressPopupButtonsController/MDPopupButtonsController.h; sourceTree = "<group>"; };
+		4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDPopupButtonsController.m; path = LongPressPopupButtonsController/MDPopupButtonsController.m; sourceTree = "<group>"; };
+		4832F0BF186A267E002AA665 /* button_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_camera.png; sourceTree = "<group>"; };
+		4832F0C0186A267E002AA665 /* button_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_camera@2x.png"; sourceTree = "<group>"; };
+		4832F0C1186A267E002AA665 /* button_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_edit.png; sourceTree = "<group>"; };
+		4832F0C2186A267E002AA665 /* button_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_edit@2x.png"; sourceTree = "<group>"; };
+		4832F0C3186A267E002AA665 /* button_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_gallery.png; sourceTree = "<group>"; };
+		4832F0C4186A267E002AA665 /* button_gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gallery@2x.png"; sourceTree = "<group>"; };
+		4832F0C5186A267E002AA665 /* button_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_share.png; sourceTree = "<group>"; };
+		4832F0C6186A267E002AA665 /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
 		487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDLongPressPopupButtonsController.h; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.h; sourceTree = "<group>"; };
 		487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDLongPressPopupButtonsController.m; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.m; sourceTree = "<group>"; };
 		48C58B0C1835901A00C6AB23 /* MDAnimatedDotsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDAnimatedDotsViewController.xib; sourceTree = "<group>"; };
@@ -226,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				4812FDEE1835824A0036749C /* Categories */,
+				4832F0E1186A2C9F002AA665 /* MGImageUtilities */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -253,6 +267,14 @@
 			children = (
 				4812FE531835898F0036749C /* button_reveal_menu.png */,
 				4812FE541835898F0036749C /* button_reveal_menu@2x.png */,
+				4832F0BF186A267E002AA665 /* button_camera.png */,
+				4832F0C0186A267E002AA665 /* button_camera@2x.png */,
+				4832F0C1186A267E002AA665 /* button_edit.png */,
+				4832F0C2186A267E002AA665 /* button_edit@2x.png */,
+				4832F0C3186A267E002AA665 /* button_gallery.png */,
+				4832F0C4186A267E002AA665 /* button_gallery@2x.png */,
+				4832F0C5186A267E002AA665 /* button_share.png */,
+				4832F0C6186A267E002AA665 /* button_share@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -274,9 +296,20 @@
 			path = SideMenuViewController;
 			sourceTree = "<group>";
 		};
+		4832F0E1186A2C9F002AA665 /* MGImageUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				4832EAF0186A2EA80075068A /* UIImage+Tint.h */,
+				4832EAF1186A2EA80075068A /* UIImage+Tint.m */,
+			);
+			path = MGImageUtilities;
+			sourceTree = "<group>";
+		};
 		487F3A7318467D7100130741 /* LongPressPopupButtonsController */ = {
 			isa = PBXGroup;
 			children = (
+				4832F0BC186A23D0002AA665 /* MDPopupButtonsController.h */,
+				4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */,
 				487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */,
 				487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */,
 			);
@@ -361,10 +394,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4812FE591835898F0036749C /* button_reveal_menu@2x.png in Resources */,
 				4812FE5A1835898F0036749C /* MDSideMenuViewController.xib in Resources */,
 				4812FDC6183581AA0036749C /* InfoPlist.strings in Resources */,
-				4812FE581835898F0036749C /* button_reveal_menu.png in Resources */,
 				48C58B0D1835901A00C6AB23 /* MDAnimatedDotsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,11 +407,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4832EAF2186A2EA80075068A /* UIImage+Tint.m in Sources */,
 				4812FDF11835824A0036749C /* UIColor+HexColor.m in Sources */,
 				4812FDE6183582410036749C /* MDDotNode.m in Sources */,
 				4812FDE1183582410036749C /* MDAnimatedDotsScene.m in Sources */,
 				487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */,
 				4812FDE8183582410036749C /* MDSideMenuViewController.m in Sources */,
+				4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */,
 				4812FDE3183582410036749C /* MDAnimatedDotsViewController.m in Sources */,
 				4812FDEB183582410036749C /* MDRandom.m in Sources */,
 			);
@@ -394,6 +427,7 @@
 				4812FDE7183582410036749C /* MDDotNode.m in Sources */,
 				4812FDE2183582410036749C /* MDAnimatedDotsScene.m in Sources */,
 				4812FDE9183582410036749C /* MDSideMenuViewController.m in Sources */,
+				4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */,
 				4812FDE4183582410036749C /* MDAnimatedDotsViewController.m in Sources */,
 				4812FDC8183581AA0036749C /* MDSDKTests.m in Sources */,
 				4812FDEC183582410036749C /* MDRandom.m in Sources */,

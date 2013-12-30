@@ -15,8 +15,12 @@
 
     #import "MDSideMenuViewController.h"
 
+    #import "MDPopupButtonsController.h"
+    #import "MDLongPressPopupButtonsController.h"
+
     #import "MDRandom.h"
 
     #import "UIColor+HexColor.h"
+    #import "UIImage+Tint.h"
 
 #endif

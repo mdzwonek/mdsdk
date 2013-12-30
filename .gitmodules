@@ -1,0 +1,3 @@
+[submodule "MDSDK/MDSDK/Libraries/MGImageUtilities"]
+	path = MDSDK/MDSDK/Libraries/MGImageUtilities
+	url = https://github.com/mattgemmell/MGImageUtilities
