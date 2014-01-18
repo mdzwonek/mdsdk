@@ -29,7 +29,6 @@
 		4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
 		4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */; };
 		487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */; };
-		48C58B0D1835901A00C6AB23 /* MDAnimatedDotsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48C58B0C1835901A00C6AB23 /* MDAnimatedDotsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +97,6 @@
 		4832F0C6186A267E002AA665 /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
 		487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDLongPressPopupButtonsController.h; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.h; sourceTree = "<group>"; };
 		487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDLongPressPopupButtonsController.m; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.m; sourceTree = "<group>"; };
-		48C58B0C1835901A00C6AB23 /* MDAnimatedDotsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDAnimatedDotsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,7 +280,6 @@
 		4812FE551835898F0036749C /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				48C58B0B1835901A00C6AB23 /* AnimatedDotViews */,
 				4812FE561835898F0036749C /* SideMenuViewController */,
 			);
 			path = Nibs;
@@ -314,14 +311,6 @@
 				487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */,
 			);
 			name = LongPressPopupButtonsController;
-			sourceTree = "<group>";
-		};
-		48C58B0B1835901A00C6AB23 /* AnimatedDotViews */ = {
-			isa = PBXGroup;
-			children = (
-				48C58B0C1835901A00C6AB23 /* MDAnimatedDotsViewController.xib */,
-			);
-			path = AnimatedDotViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,7 +385,6 @@
 			files = (
 				4812FE5A1835898F0036749C /* MDSideMenuViewController.xib in Resources */,
 				4812FDC6183581AA0036749C /* InfoPlist.strings in Resources */,
-				48C58B0D1835901A00C6AB23 /* MDAnimatedDotsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,9 +517,11 @@
 		4812FDCC183581AA0036749C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/MDSDK.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -541,6 +531,7 @@
 		4812FDCD183581AA0036749C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/MDSDK.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";

@@ -77,6 +77,22 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 
 #pragma mark - Scene lifecycle
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
 - (instancetype)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
     if (self) {
@@ -146,7 +162,16 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 - (void)start {
     self.isFirstRefreshAfterStop = YES;
     [self.motionManager startDeviceMotionUpdatesToQueue:self.motionCallbacksOperationQueue withHandler:^(CMDeviceMotion *motion, NSError *error) {
-        self.currentVelocity = UIOffsetMake(motion.gravity.x, motion.gravity.y);
+        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+        if (orientation == UIDeviceOrientationPortrait) {
+            self.currentVelocity = UIOffsetMake(motion.gravity.x, motion.gravity.y);
+        } else if (orientation == UIDeviceOrientationLandscapeLeft) {
+            self.currentVelocity = UIOffsetMake(-motion.gravity.y, motion.gravity.x);
+        } else if (orientation == UIDeviceOrientationLandscapeRight) {
+            self.currentVelocity = UIOffsetMake(motion.gravity.y, -motion.gravity.x);
+        } else if (orientation == UIDeviceOrientationPortraitUpsideDown) {
+            self.currentVelocity = UIOffsetMake(-motion.gravity.x, -motion.gravity.y);
+        }
     }];
     
     [self startGeneratingDotNodes];
@@ -239,6 +264,10 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     
     UIGraphicsBeginImageContext(self.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if (context == nil) {
+        return nil;
+    }
     
     CGContextDrawLinearGradient(context, gradient, CGPointZero, CGPointMake(0.0f, CGRectGetHeight(self.view.frame)), 0);
     

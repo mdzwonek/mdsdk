@@ -17,13 +17,49 @@
 
 @implementation MDAnimatedDotsViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize {
+    self.dotsScene = [[MDAnimatedDotsScene alloc] init];
+    self.dotsScene.scaleMode = SKSceneScaleModeResizeFill;
+}
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    SKView *skView = (SKView *)self.view;
+    SKView *skView;
+    
+    if (![self.view isKindOfClass:[SKView class]]) {
+        skView = [[SKView alloc] initWithFrame:self.view.frame];
+        skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.view = skView;
+    }
+    
+    self.dotsScene.size = skView.bounds.size;
+    
     if (!skView.scene) {
-        self.dotsScene = [[MDAnimatedDotsScene alloc] initWithSize:skView.bounds.size];
-        self.dotsScene.scaleMode = SKSceneScaleModeResizeFill;
         [skView presentScene:self.dotsScene];
     }
 }
