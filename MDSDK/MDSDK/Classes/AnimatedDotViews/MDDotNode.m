@@ -8,11 +8,11 @@
 
 #import "MDDotNode.h"
 
+#define MATEUSZ_CONSTANT ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone ? 400.0f : 700.0f)
+
 
 static const CGFloat STROKE_RADIUS_MIN = 0.3f;
 static const CGFloat STROKE_RADIUS_MAX = 0.925f;
-
-static const CGFloat MATEUSZ_CONSTANT = 400.0f;
 
 
 @interface MDDotNode ()
