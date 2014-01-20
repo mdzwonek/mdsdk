@@ -18,4 +18,6 @@
 
 - (void)updatePositionWithDeltaVelocity:(UIOffset)deltaVelocity andDeltaTime:(NSTimeInterval)deltaTime;
 
+- (void)updateDotColor:(UIColor *)color withDuration:(NSTimeInterval)duration;
+
 @end

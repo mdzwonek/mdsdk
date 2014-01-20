@@ -51,6 +51,8 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 
 - (void)initialize;
 
+- (void)refreshDotsColorsWithDuration:(NSTimeInterval)duration;
+- (void)refreshBackgroundImageWithDuration:(NSTimeInterval)duration;
 - (void)refreshBackgroundImage;
 
 - (void)startGeneratingDotNodes;
@@ -141,6 +143,17 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     [self stop];
 }
 
+- (void)refreshUIWithBackgroundChangeDuration:(NSTimeInterval)backgroundDuration andDotsChangeDuration:(NSTimeInterval)dotsDuration {
+    [self refreshDotsColorsWithDuration:dotsDuration];
+    [self refreshBackgroundImageWithDuration:backgroundDuration];
+}
+
+- (void)refreshDotsColorsWithDuration:(NSTimeInterval)duration {
+    for (MDDotNode *dotNode in self.dotNodes) {
+        [dotNode updateDotColor:self.colorForDotNode(dotNode) withDuration:duration];
+    }
+}
+
 - (void)didChangeSize:(CGSize)oldSize {
     [self refreshBackgroundImage];
 }
@@ -148,6 +161,18 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 - (void)setBackgroundImage:(UIImage *(^)())backgroundImage {
     _backgroundImage = backgroundImage;
     [self refreshBackgroundImage];
+}
+
+- (void)refreshBackgroundImageWithDuration:(NSTimeInterval)duration {
+    SKSpriteNode *tempBackgroundNode = [[SKSpriteNode alloc] initWithTexture:self.backgroundNode.texture];
+    tempBackgroundNode.position = self.backgroundNode.position;
+    [self insertChild:tempBackgroundNode atIndex:[self.children indexOfObject:self.backgroundNode] + 1];// insert temp background in front of current one
+    
+    self.backgroundNode.texture = [SKTexture textureWithImage:self.backgroundImage != nil ? self.backgroundImage() : [self defaultBackgroundImage]];
+    
+    [tempBackgroundNode runAction:[SKAction fadeOutWithDuration:duration] completion:^{
+        [tempBackgroundNode removeFromParent];
+    }];
 }
 
 - (void)refreshBackgroundImage {

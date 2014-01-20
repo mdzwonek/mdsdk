@@ -23,7 +23,7 @@ static const CGFloat STROKE_RADIUS_MAX = 0.925f;
 
 @property (nonatomic, assign) UIOffset velocity;
 
-- (void)generateInternalImage;
+- (UIImage *)generateInternalImage;
 
 @end
 
@@ -50,7 +50,7 @@ static const CGFloat STROKE_RADIUS_MAX = 0.925f;
 
 - (void)setDotColor:(UIColor *)dotColor {
     _dotColor = dotColor;
-    [self generateInternalImage];
+    self.textureNode.texture = [SKTexture textureWithImage:[self generateInternalImage]];
 }
 
 - (void)setDepth:(CGFloat)depth {
@@ -59,13 +59,13 @@ static const CGFloat STROKE_RADIUS_MAX = 0.925f;
     self.size = CGSizeMake(self.depth * self.diameter, self.depth * self.diameter);
     
     self.textureNode.alpha = self.depth;
-    
-    [self generateInternalImage];
+    self.textureNode.size = self.size;
+    self.textureNode.texture = [SKTexture textureWithImage:[self generateInternalImage]];
 }
 
-- (void)generateInternalImage {
+- (UIImage *)generateInternalImage {
     if (self.dotColor == nil) {
-        return;
+        return nil;
     }
     UIGraphicsBeginImageContext(self.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -88,8 +88,7 @@ static const CGFloat STROKE_RADIUS_MAX = 0.925f;
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    self.textureNode.size = self.size;
-    self.textureNode.texture = [SKTexture textureWithImage:image];
+    return image;
 }
 
 - (void)updatePositionWithDeltaVelocity:(UIOffset)deltaVelocity andDeltaTime:(NSTimeInterval)deltaTime {
@@ -99,6 +98,15 @@ static const CGFloat STROKE_RADIUS_MAX = 0.925f;
     
     CGFloat multiplier = powf(self.depth, 2.0f) * MATEUSZ_CONSTANT * deltaTime;
     self.position = CGPointMake(self.position.x + multiplier * self.velocity.horizontal, self.position.y + multiplier * self.velocity.vertical);
+}
+
+- (void)updateDotColor:(UIColor *)color withDuration:(NSTimeInterval)duration {
+    _dotColor = color;
+    NSTimeInterval halfDuration = duration / 2.0;
+    SKAction *fadeOutAction = [SKAction fadeOutWithDuration:halfDuration];
+    SKAction *setTextureAction = [SKAction setTexture:[SKTexture textureWithImage:[self generateInternalImage]]];
+    SKAction *fadeInAction = [SKAction fadeAlphaTo:self.textureNode.alpha duration:halfDuration];
+    [self.textureNode runAction:[SKAction sequence:@[ fadeOutAction, setTextureAction, fadeInAction ]]];
 }
 
 @end
