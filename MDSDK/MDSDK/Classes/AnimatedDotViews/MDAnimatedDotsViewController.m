@@ -55,6 +55,8 @@
         skView = [[SKView alloc] initWithFrame:self.view.frame];
         skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.view = skView;
+    } else {
+        skView = (SKView *) self.view;
     }
     
     self.dotsScene.size = skView.bounds.size;

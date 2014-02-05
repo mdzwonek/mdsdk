@@ -50,6 +50,8 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 - (id)initWithLeftMenuVC:(UIViewController *)leftMenuVC rightMenuVC:(UIViewController *)rightMenuVC andContentVC:(UIViewController *)contentVC {
     self = [super init];
     if (self) {
+        NSAssert(leftMenuVC != nil || rightMenuVC != nil, @"At least one of the menu view controllers has to be non-nil");
+        NSAssert(contentVC != nil, @"Content view controller can't be nil");
         _leftMenuViewController = leftMenuVC;
         _rightMenuViewController = rightMenuVC;
         _contentViewController = contentVC;
@@ -70,15 +72,19 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
     [self updateMenusFrames];
     
-    [self addChildViewController:self.leftMenuViewController];
-    self.leftMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.leftMenuView.frame), CGRectGetHeight(self.leftMenuView.frame));
-    self.leftMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.leftMenuView addSubview:self.leftMenuViewController.view];
+    if (self.leftMenuViewController != nil) {
+        [self addChildViewController:self.leftMenuViewController];
+        self.leftMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.leftMenuView.frame), CGRectGetHeight(self.leftMenuView.frame));
+        self.leftMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.leftMenuView addSubview:self.leftMenuViewController.view];
+    }
     
-    [self addChildViewController:self.rightMenuViewController];
-    self.rightMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.rightMenuView.frame), CGRectGetHeight(self.rightMenuView.frame));
-    self.rightMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.rightMenuView addSubview:self.rightMenuViewController.view];
+    if (self.rightMenuViewController != nil) {
+        [self addChildViewController:self.rightMenuViewController];
+        self.rightMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.rightMenuView.frame), CGRectGetHeight(self.rightMenuView.frame));
+        self.rightMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.rightMenuView addSubview:self.rightMenuViewController.view];
+    }
     
     [self addChildViewController:self.contentViewController];
     self.contentViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
