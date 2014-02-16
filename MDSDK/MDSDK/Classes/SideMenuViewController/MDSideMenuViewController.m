@@ -19,7 +19,6 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_CONTENT_VIEW_SHADOW_OPACITY = 0.6f;
 
 const NSTimeInterval MD_SIDE_MENU_VC_DEFAULT_MENU_ANIMATION_TIME = 0.3;
 
-const CGFloat MD_SIDE_MENU_VC_DEFAULT_MIN_TRANSLATION_TO_SHOW_MENU = 100.0f;
 const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_CONTENT_TRANSLATION = 270.0f;
 const CGFloat MD_SIDE_MENU_VC_DEFAULT_MIN_MENU_SCALE = 0.9f;
 const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
@@ -27,20 +26,22 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 @interface MDSideMenuViewController ()
 
-@property (nonatomic, weak) IBOutlet UIView *mainView;
+@property (nonatomic) IBOutlet UIView *contentView;
+@property (nonatomic) IBOutlet UIView *leftMenuView;
+@property (nonatomic) IBOutlet UIView *rightMenuView;
 
-@property (nonatomic, weak) IBOutlet UIView *contentView;
+@property (nonatomic) IBOutlet UIView *mainViewTapLayer;
 
-@property (nonatomic, strong) IBOutlet UIView *leftMenuView;
-@property (nonatomic, strong) IBOutlet UIView *rightMenuView;
+- (BOOL)menuHidden:(UIView *)menu;
 
-@property (nonatomic, weak) IBOutlet UIView *mainViewTapLayerLayer;
-
-- (void)showMenu:(UIView *)menu toOffset:(CGFloat)offset withCompletion:(void (^)(void))completion;
-- (void)hideMenu:(UIView *)menu andCompletion:(void (^)(void))completion;
+- (void)showMenu:(UIView *)menu withCompletion:(void (^)(void))completion;
+- (void)hideMenu:(UIView *)menu withCompletion:(void (^)(void))completion;
 
 - (void)didPanToShowMenu:(UIPanGestureRecognizer *)recogniser;
 - (IBAction)didTapMainViewInvisibleLayer:(id)sender;
+
+- (void)updateMenu:(UIView *)menu withRevealPercentage:(CGFloat)percentage andWillBeVisibleFlag:(BOOL)isShowing;
+- (void)defaultMenuTransformations:(UIView *)menu withRevealPercentage:(CGFloat)percentage andWillBeVisibleFlag:(BOOL)isShowing;
 
 @end
 
@@ -59,10 +60,13 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         self.contentViewShadowRadius = MD_SIDE_MENU_VC_DEFAULT_CONTENT_VIEW_SHADOW_RADIUS;
         self.contentViewShadowOpacity = MD_SIDE_MENU_VC_DEFAULT_CONTENT_VIEW_SHADOW_OPACITY;
         self.menuAnimationTime = MD_SIDE_MENU_VC_DEFAULT_MENU_ANIMATION_TIME;
-        self.minTranslationToShowMenu = MD_SIDE_MENU_VC_DEFAULT_MIN_TRANSLATION_TO_SHOW_MENU;
         self.maxContentTranslation = MD_SIDE_MENU_VC_DEFAULT_MAX_CONTENT_TRANSLATION;
         self.minMenuScale = MD_SIDE_MENU_VC_DEFAULT_MIN_MENU_SCALE;
         self.maxMenuScale = MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE;
+        __weak MDSideMenuViewController *weakSelf = self;
+        self.applyMenuTransformations = ^(MDSideMenuViewController *sideMenuVC, UIView *menu, CGFloat percentage, BOOL willBeVisible) {
+            [weakSelf defaultMenuTransformations:menu withRevealPercentage:percentage andWillBeVisibleFlag:willBeVisible];
+        };
     }
     return self;
 }
@@ -89,7 +93,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     [self addChildViewController:self.contentViewController];
     self.contentViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
     self.contentViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.contentView addSubview:self.contentViewController.view];
+    [self.contentView insertSubview:self.contentViewController.view belowSubview:self.mainViewTapLayer];
 
     CALayer *mainContentLayer = self.contentView.layer;
     [self updateContentViewShadowRadius];
@@ -100,14 +104,14 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     mainContentLayer.rasterizationScale = [[UIScreen mainScreen] scale];
     
     UIGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanToShowMenu:)];
-    [self.mainView addGestureRecognizer:recognizer];
+    [self.contentView addGestureRecognizer:recognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    self.leftMenuView.transform = CGAffineTransformMakeScale(self.minMenuScale, self.minMenuScale);
-    self.rightMenuView.transform = CGAffineTransformMakeScale(self.minMenuScale, self.minMenuScale);
+    [self updateMenu:self.leftMenuView withRevealPercentage:0.0f andWillBeVisibleFlag:NO];
+    [self updateMenu:self.rightMenuView withRevealPercentage:0.0f andWillBeVisibleFlag:NO];
     [self.leftMenuView removeFromSuperview];
     [self.rightMenuView removeFromSuperview];
 }
@@ -196,11 +200,15 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 #pragma mark - Menus helpers
 
 - (BOOL)leftMenuHidden {
-    return self.leftMenuView.superview == nil;
+    return [self menuHidden:self.leftMenuView];
 }
 
 - (BOOL)rightMenuHidden {
-    return self.rightMenuView.superview == nil;
+    return [self menuHidden:self.rightMenuView];
+}
+
+- (BOOL)menuHidden:(UIView *)menu {
+    return menu.superview == nil;
 }
 
 - (void)toggleLeftMenu {
@@ -219,7 +227,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 - (void)toggleRightMenu {
     if (self.rightMenuHidden) {
-        if (self.leftMenuView) {
+        if (self.leftMenuHidden) {
             [self showRightMenu];
         } else {
             [self hideLeftMenuWithCompletion:^{
@@ -239,7 +247,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)showLeftMenuWithCompletion:(void (^)(void))completion {
-    [self showMenu:self.leftMenuView toOffset:self.maxContentTranslation withCompletion:^{
+    [self showMenu:self.leftMenuView withCompletion:^{
         if (self.didToggleLeftMenuBlock) self.didToggleLeftMenuBlock(self);
         if (completion) completion();
     }];
@@ -250,21 +258,18 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)showRightMenuWithCompletion:(void (^)(void))completion {
-    [self showMenu:self.rightMenuView toOffset:-self.maxContentTranslation withCompletion:^{
-        if (self.didToggleRightMenuBlock) self.didToggleLeftMenuBlock(self);
+    [self showMenu:self.rightMenuView withCompletion:^{
+        if (self.didToggleRightMenuBlock) self.didToggleRightMenuBlock(self);
         if (completion) completion();
     }];
 }
 
-- (void)showMenu:(UIView *)menu toOffset:(CGFloat)offset withCompletion:(void (^)(void))completion {
+- (void)showMenu:(UIView *)menu withCompletion:(void (^)(void))completion {
     [self.view insertSubview:menu atIndex:0];
     [UIView animateWithDuration:self.menuAnimationTime animations:^{
-        menu.layer.transform = CATransform3DScale(CATransform3DIdentity, self.maxMenuScale, self.maxMenuScale, 1.0f);
-        CGRect frame = self.mainView.frame;
-        frame.origin.x = offset;
-        self.mainView.frame = frame;
+        [self updateMenu:menu withRevealPercentage:1.0f andWillBeVisibleFlag:YES];
     } completion:^(BOOL finished) {
-        self.mainViewTapLayerLayer.hidden = NO;
+        self.mainViewTapLayer.hidden = NO;
         if (completion != NULL) completion();
     }];
 }
@@ -277,7 +282,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)hideLeftMenuWithCompletion:(void (^)(void))completion {
-    [self hideMenu:self.leftMenuView andCompletion:^{
+    [self hideMenu:self.leftMenuView withCompletion:^{
         if (self.didToggleLeftMenuBlock) self.didToggleLeftMenuBlock(self);
         if (completion) completion();
     }];
@@ -288,21 +293,18 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)hideRightMenuWithCompletion:(void (^)(void))completion {
-    [self hideMenu:self.rightMenuView andCompletion:^{
-        if (self.didToggleLeftMenuBlock) self.didToggleRightMenuBlock(self);
+    [self hideMenu:self.rightMenuView withCompletion:^{
+        if (self.didToggleRightMenuBlock) self.didToggleRightMenuBlock(self);
         if (completion) completion();
     }];
 }
 
-- (void)hideMenu:(UIView *)menu andCompletion:(void (^)(void))completion {
+- (void)hideMenu:(UIView *)menu withCompletion:(void (^)(void))completion {
     [UIView animateWithDuration:self.menuAnimationTime animations:^{
-        menu.layer.transform = CATransform3DScale(CATransform3DIdentity, self.minMenuScale, self.minMenuScale, 1.0f);
-        CGRect frame = self.mainView.frame;
-        frame.origin.x = 0;
-        self.mainView.frame = frame;
+        [self updateMenu:menu withRevealPercentage:0.0f andWillBeVisibleFlag:NO];
     } completion:^(BOOL finished) {
         [menu removeFromSuperview];
-        self.mainViewTapLayerLayer.hidden = YES;
+        self.mainViewTapLayer.hidden = YES;
         if (completion != NULL) completion();
     }];
 }
@@ -312,41 +314,32 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 - (void)didPanToShowMenu:(UIPanGestureRecognizer *)recognizer {
     static UIView *menu;
-    static CGFloat minOffset;
+    static BOOL menuWillBeVisible;
+    CGPoint translation = [recognizer translationInView:recognizer.view];
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint translation = [recognizer translationInView:recognizer.view];
         if (menu == nil) {
             if (self.leftMenuViewController != nil && (!self.leftMenuHidden || (self.rightMenuHidden && translation.x >= 0))) {
                 menu = self.leftMenuView;
-                minOffset = 0.0f;
             } else if (self.rightMenuViewController != nil && (!self.rightMenuHidden || (self.leftMenuHidden && translation.x < 0))) {
                 menu = self.rightMenuView;
-                minOffset = -self.maxContentTranslation;
             }
+            menuWillBeVisible = [self menuHidden:menu];
             [self.view insertSubview:menu atIndex:0];
         }
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        CGPoint translation = [recognizer translationInView:recognizer.view];
-        [recognizer setTranslation:CGPointZero inView:recognizer.view];
-        CGFloat percentageOfAnimation = fabsf(CGRectGetMinX(self.mainView.frame) / self.maxContentTranslation);
-        CGFloat menuScale = (self.maxMenuScale - self.minMenuScale) * percentageOfAnimation + self.minMenuScale;
-        menu.transform = CGAffineTransformMakeScale(menuScale, menuScale);
-        CGFloat maxOffset = minOffset + self.maxContentTranslation;
-        CGRect frame = self.mainView.frame;
-        frame.origin.x = MAX(minOffset, MIN(maxOffset, frame.origin.x + translation.x));
-        self.mainView.frame = frame;
-        if (self.isPanningMenuBlock) self.isPanningMenuBlock(self, menu == self.leftMenuView, percentageOfAnimation);
+        CGFloat animationPercentage = MIN(MAX(fabs(translation.x / self.maxContentTranslation), 0.0f), 1.0f);
+        CGFloat revealPercentage = menuWillBeVisible ? animationPercentage : 1.0f - animationPercentage;
+        [self updateMenu:menu withRevealPercentage:revealPercentage andWillBeVisibleFlag:menuWillBeVisible];
     } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         CGFloat velocity = [recognizer velocityInView:recognizer.view].x;
-        CGFloat offset = self.mainView.frame.origin.x;
         if (menu == self.leftMenuView) {
-            if (velocity > 0.0f || (velocity == 0.0f && offset >= self.minTranslationToShowMenu)) {
+            if (velocity > 0.0f) {
                 [self showLeftMenu];
             } else {
                 [self hideLeftMenu];
             }
         } else {// if (menu == self.rightMenuView)
-            if (velocity < 0.0f || (velocity == 0.0f && offset <= -self.minTranslationToShowMenu)) {
+            if (velocity < 0.0f) {
                 [self showRightMenu];
             } else {
                 [self hideRightMenu];
@@ -364,5 +357,22 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     }
 }
 
+
+#pragma mark - Menu animations
+
+- (void)updateMenu:(UIView *)menu withRevealPercentage:(CGFloat)percentage andWillBeVisibleFlag:(BOOL)willBeVisible {
+    if (self.applyMenuTransformations != NULL) {
+        self.applyMenuTransformations(self, menu, percentage, willBeVisible);
+    }
+}
+
+- (void)defaultMenuTransformations:(UIView *)menu withRevealPercentage:(CGFloat)percentage andWillBeVisibleFlag:(BOOL)willBeVisible {
+    CGFloat menuScale = (self.maxMenuScale - self.minMenuScale) * percentage + self.minMenuScale;
+    menu.transform = CGAffineTransformMakeScale(menuScale, menuScale);
+    CGFloat revealedX = menu == self.leftMenuView ? self.maxContentTranslation : - self.maxContentTranslation;
+    CGRect frame = self.contentView.frame;
+    frame.origin.x = revealedX * percentage;
+    self.contentView.frame = frame;
+}
 
 @end

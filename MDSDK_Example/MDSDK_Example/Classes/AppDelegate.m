@@ -87,9 +87,6 @@ static const CGFloat CORNER_RADIUS = 3.0f;
     sideMenuVC.didToggleRightMenuBlock = ^(MDSideMenuViewController *sideMenuVC) {
         NSLog(@"Did toggle right menu. Is hidden now %d.", sideMenuVC.rightMenuHidden);
     };
-    sideMenuVC.isPanningMenuBlock = ^(MDSideMenuViewController *sideMenuVC, BOOL left, float revealedPercentage) {
-        NSLog(@"Is panning %@ menu. Revealed percentage %f.", (left ? @"left" : @"right"), revealedPercentage);
-    };
 }
 
 @end
