@@ -55,9 +55,15 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 - (void)refreshBackgroundImageWithDuration:(NSTimeInterval)duration;
 - (void)refreshBackgroundImage;
 
+- (BOOL)isStarted;
+
 - (void)startGeneratingDotNodes;
 - (void)generateDotNode;
 - (void)stopGeneratingDotNodes;
+
+- (void)addActionsToDotNodesIncludingFadeIn:(BOOL)includeFadeIn;
+- (void)addActionsToDotNode:(MDDotNode *)dotNode includingFadeIn:(BOOL)includeFadeIn;
+- (void)removeActionsFromDotNodes;
 
 - (UIImage *)defaultBackgroundImage;
 - (NSInteger)defaultNumberOfDots;
@@ -164,15 +170,21 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 }
 
 - (void)refreshBackgroundImageWithDuration:(NSTimeInterval)duration {
-    SKSpriteNode *tempBackgroundNode = [[SKSpriteNode alloc] initWithTexture:self.backgroundNode.texture];
-    tempBackgroundNode.position = self.backgroundNode.position;
-    [self insertChild:tempBackgroundNode atIndex:[self.children indexOfObject:self.backgroundNode] + 1];// insert temp background in front of current one
-    
-    self.backgroundNode.texture = [SKTexture textureWithImage:self.backgroundImage != nil ? self.backgroundImage() : [self defaultBackgroundImage]];
-    
-    [tempBackgroundNode runAction:[SKAction fadeOutWithDuration:duration] completion:^{
-        [tempBackgroundNode removeFromParent];
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        SKTexture *texture = [SKTexture textureWithImage:self.backgroundImage != nil ? self.backgroundImage() : [self defaultBackgroundImage]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SKSpriteNode *tempBackgroundNode = [[SKSpriteNode alloc] initWithTexture:self.backgroundNode.texture];
+            tempBackgroundNode.position = self.backgroundNode.position;
+            // insert temp background in front of current one
+            [self insertChild:tempBackgroundNode atIndex:[self.children indexOfObject:self.backgroundNode] + 1];
+            
+            self.backgroundNode.texture = texture;
+            
+            [tempBackgroundNode runAction:[SKAction fadeOutWithDuration:duration] completion:^{
+                [tempBackgroundNode removeFromParent];
+            }];
+        });
+    });
 }
 
 - (void)refreshBackgroundImage {
@@ -199,12 +211,18 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
         }
     }];
     
+    [self addActionsToDotNodesIncludingFadeIn:NO];
     [self startGeneratingDotNodes];
 }
 
 - (void)stop {
     [self.motionManager stopDeviceMotionUpdates];
     [self stopGeneratingDotNodes];
+    [self removeActionsFromDotNodes];
+}
+
+- (BOOL)isStarted {
+    return self.motionManager.isDeviceMotionActive;
 }
 
 
@@ -212,6 +230,10 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 
 - (void)update:(NSTimeInterval)currentTime {
     [super update:currentTime];
+    
+    if (![self isStarted]) {
+        return;
+    }
     
     UIOffset deltaVelocity = UIOffsetSubstract(self.currentVelocity, self.lastVelocity);
     self.lastVelocity = self.currentVelocity;
@@ -250,26 +272,45 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     dotNode.depth = self.depthForDotNode(dotNode);
     dotNode.destinationVelocity = self.destinationVelocityForDotNode(dotNode);
     
-    dotNode.alpha = 0.0f;
     [self addChild:dotNode];
     [self.dotNodes addObject:dotNode];
 
-    NSTimeInterval dotViewLifeTime = self.lifeTimeForDotNode(dotNode);
-    
-    SKAction *fadeIn = [SKAction fadeInWithDuration:DOT_FADE_ANIMATION_PERCENTAGE * dotViewLifeTime];
-    SKAction *wait = [SKAction waitForDuration:(1.0 - 2 * DOT_FADE_ANIMATION_PERCENTAGE) * dotViewLifeTime];
-    SKAction *fadeOut = [SKAction fadeOutWithDuration:DOT_FADE_ANIMATION_PERCENTAGE * dotViewLifeTime];
-    SKAction *sequence = [SKAction sequence:@[fadeIn, wait, fadeOut]];
-    [dotNode runAction:sequence completion:^{
-        [dotNode removeFromParent];
-        [self.dotNodes removeObject:dotNode];
-    }];
+    [self addActionsToDotNode:dotNode includingFadeIn:YES];
 }
 
 - (void)stopGeneratingDotNodes {
     if ([self.dotsGenerator isValid]) {
         [self.dotsGenerator invalidate];
         self.dotsGenerator = nil;
+    }
+}
+
+- (void)addActionsToDotNodesIncludingFadeIn:(BOOL)includeFadeIn {
+    for (MDDotNode *dotNode in self.dotNodes) {
+        [self addActionsToDotNode:dotNode includingFadeIn:includeFadeIn];
+    }
+}
+
+- (void)addActionsToDotNode:(MDDotNode *)dotNode includingFadeIn:(BOOL)includeFadeIn {
+    if (includeFadeIn) {
+        dotNode.alpha = 0.0f;
+    }
+    
+    NSTimeInterval dotViewLifeTime = self.lifeTimeForDotNode(dotNode);
+    
+    SKAction *fadeIn = [SKAction fadeInWithDuration:DOT_FADE_ANIMATION_PERCENTAGE * dotViewLifeTime];
+    SKAction *wait = [SKAction waitForDuration:(1.0 - 2 * DOT_FADE_ANIMATION_PERCENTAGE) * dotViewLifeTime];
+    SKAction *fadeOut = [SKAction fadeOutWithDuration:DOT_FADE_ANIMATION_PERCENTAGE * dotViewLifeTime];
+    SKAction *sequence = includeFadeIn ? [SKAction sequence:@[fadeIn, wait, fadeOut]] : [SKAction sequence:@[wait, fadeOut]];
+    [dotNode runAction:sequence completion:^{
+        [dotNode removeFromParent];
+        [self.dotNodes removeObject:dotNode];
+    }];
+}
+
+- (void)removeActionsFromDotNodes {
+    for (MDDotNode *dotNode in self.dotNodes) {
+        [dotNode removeAllActions];
     }
 }
 

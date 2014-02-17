@@ -102,11 +102,17 @@ static const CGFloat STROKE_RADIUS_MAX = 0.925f;
 
 - (void)updateDotColor:(UIColor *)color withDuration:(NSTimeInterval)duration {
     _dotColor = color;
-    NSTimeInterval halfDuration = duration / 2.0;
-    SKAction *fadeOutAction = [SKAction fadeOutWithDuration:halfDuration];
-    SKAction *setTextureAction = [SKAction setTexture:[SKTexture textureWithImage:[self generateInternalImage]]];
-    SKAction *fadeInAction = [SKAction fadeAlphaTo:self.textureNode.alpha duration:halfDuration];
-    [self.textureNode runAction:[SKAction sequence:@[ fadeOutAction, setTextureAction, fadeInAction ]]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSTimeInterval halfDuration = duration / 2.0;
+        SKAction *fadeOutAction = [SKAction fadeOutWithDuration:halfDuration];
+        SKAction *setTextureAction = [SKAction setTexture:[SKTexture textureWithImage:[self generateInternalImage]]];
+        SKAction *fadeInAction = [SKAction fadeAlphaTo:self.textureNode.alpha duration:halfDuration];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.textureNode runAction:[SKAction sequence:@[ fadeOutAction, setTextureAction, fadeInAction ]]];
+        });
+    });
 }
 
 @end
