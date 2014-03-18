@@ -24,6 +24,8 @@
 @property (nonatomic, copy) UIOffset (^destinationVelocityForDotNode)(MDDotNode *dotNode);
 @property (nonatomic, copy) NSTimeInterval (^lifeTimeForDotNode)(MDDotNode *dotNode);
 
+@property (nonatomic, readonly, getter = isStarted) BOOL started;
+
 - (void)start;
 - (void)stop;
 

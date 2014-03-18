@@ -104,7 +104,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     mainContentLayer.rasterizationScale = [[UIScreen mainScreen] scale];
     
     UIGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanToShowMenu:)];
-    [self.contentView addGestureRecognizer:recognizer];
+    [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -327,9 +327,12 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
             [self.view insertSubview:menu atIndex:0];
         }
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        CGFloat animationPercentage = MIN(MAX(fabs(translation.x / self.maxContentTranslation), 0.0f), 1.0f);
-        CGFloat revealPercentage = menuWillBeVisible ? animationPercentage : 1.0f - animationPercentage;
-        [self updateMenu:menu withRevealPercentage:revealPercentage andWillBeVisibleFlag:menuWillBeVisible];
+        if (menu != nil) {
+            CGFloat translationRatio = translation.x / self.maxContentTranslation;
+            translationRatio = menuWillBeVisible ? translationRatio : translationRatio + 1.0f;
+            CGFloat animationPercentage = fabs(MIN(MAX(translationRatio, 0.0f), 1.0f));
+            [self updateMenu:menu withRevealPercentage:animationPercentage andWillBeVisibleFlag:menuWillBeVisible];
+        }
     } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         CGFloat velocity = [recognizer velocityInView:recognizer.view].x;
         if (menu == self.leftMenuView) {
@@ -338,7 +341,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
             } else {
                 [self hideLeftMenu];
             }
-        } else {// if (menu == self.rightMenuView)
+        } else if (menu == self.rightMenuView) {
             if (velocity < 0.0f) {
                 [self showRightMenu];
             } else {

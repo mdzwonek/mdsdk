@@ -23,4 +23,6 @@
     #import "UIColor+HexColor.h"
     #import "UIImage+Tint.h"
 
+    #import "MDMacros.h"
+
 #endif

@@ -44,7 +44,9 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 
 @property (nonatomic, strong) NSTimer *dotsGenerator;
 
+@property (nonatomic, getter = isStarted) BOOL started;
 @property (nonatomic, assign) BOOL isFirstRefreshAfterStop;
+
 @property (nonatomic, assign) UIOffset currentVelocity;
 @property (nonatomic, assign) UIOffset lastVelocity;
 @property (nonatomic, assign) NSTimeInterval lastRefreshTime;
@@ -54,8 +56,6 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 - (void)refreshDotsColorsWithDuration:(NSTimeInterval)duration;
 - (void)refreshBackgroundImageWithDuration:(NSTimeInterval)duration;
 - (void)refreshBackgroundImage;
-
-- (BOOL)isStarted;
 
 - (void)startGeneratingDotNodes;
 - (void)generateDotNode;
@@ -197,6 +197,11 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 #pragma mark - Start / stop
 
 - (void)start {
+    if (self.isStarted) {
+        return;
+    }
+    self.started = YES;
+    
     self.isFirstRefreshAfterStop = YES;
     [self.motionManager startDeviceMotionUpdatesToQueue:self.motionCallbacksOperationQueue withHandler:^(CMDeviceMotion *motion, NSError *error) {
         UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
@@ -216,13 +221,14 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 }
 
 - (void)stop {
+    if (!self.isStarted) {
+        return;
+    }
+    self.started = NO;
+    
     [self.motionManager stopDeviceMotionUpdates];
     [self stopGeneratingDotNodes];
     [self removeActionsFromDotNodes];
-}
-
-- (BOOL)isStarted {
-    return self.motionManager.isDeviceMotionActive;
 }
 
 
@@ -231,7 +237,7 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 - (void)update:(NSTimeInterval)currentTime {
     [super update:currentTime];
     
-    if (![self isStarted]) {
+    if (!self.isStarted) {
         return;
     }
     

@@ -80,21 +80,12 @@
 		4812FDF71835827C0036749C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		4812FDF9183582880036749C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4812FDFB183582AE0036749C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		4812FE531835898F0036749C /* button_reveal_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_reveal_menu.png; sourceTree = "<group>"; };
-		4812FE541835898F0036749C /* button_reveal_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_reveal_menu@2x.png"; sourceTree = "<group>"; };
 		4812FE571835898F0036749C /* MDSideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDSideMenuViewController.xib; sourceTree = "<group>"; };
 		4832EAF0186A2EA80075068A /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "Classes/UIImage+Tint.h"; sourceTree = "<group>"; };
 		4832EAF1186A2EA80075068A /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "Classes/UIImage+Tint.m"; sourceTree = "<group>"; };
 		4832F0BC186A23D0002AA665 /* MDPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDPopupButtonsController.h; path = LongPressPopupButtonsController/MDPopupButtonsController.h; sourceTree = "<group>"; };
 		4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDPopupButtonsController.m; path = LongPressPopupButtonsController/MDPopupButtonsController.m; sourceTree = "<group>"; };
-		4832F0BF186A267E002AA665 /* button_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_camera.png; sourceTree = "<group>"; };
-		4832F0C0186A267E002AA665 /* button_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_camera@2x.png"; sourceTree = "<group>"; };
-		4832F0C1186A267E002AA665 /* button_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_edit.png; sourceTree = "<group>"; };
-		4832F0C2186A267E002AA665 /* button_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_edit@2x.png"; sourceTree = "<group>"; };
-		4832F0C3186A267E002AA665 /* button_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_gallery.png; sourceTree = "<group>"; };
-		4832F0C4186A267E002AA665 /* button_gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gallery@2x.png"; sourceTree = "<group>"; };
-		4832F0C5186A267E002AA665 /* button_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_share.png; sourceTree = "<group>"; };
-		4832F0C6186A267E002AA665 /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
+		48798CD318C1CC1D00024154 /* MDMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMacros.h; sourceTree = "<group>"; };
 		487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDLongPressPopupButtonsController.h; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.h; sourceTree = "<group>"; };
 		487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDLongPressPopupButtonsController.m; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				4812FDAF183581AA0036749C /* MDSDK-Prefix.pch */,
+				48798CD318C1CC1D00024154 /* MDMacros.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -254,27 +246,9 @@
 		4812FE511835898F0036749C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4812FE521835898F0036749C /* Images */,
 				4812FE551835898F0036749C /* Nibs */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		4812FE521835898F0036749C /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				4812FE531835898F0036749C /* button_reveal_menu.png */,
-				4812FE541835898F0036749C /* button_reveal_menu@2x.png */,
-				4832F0BF186A267E002AA665 /* button_camera.png */,
-				4832F0C0186A267E002AA665 /* button_camera@2x.png */,
-				4832F0C1186A267E002AA665 /* button_edit.png */,
-				4832F0C2186A267E002AA665 /* button_edit@2x.png */,
-				4832F0C3186A267E002AA665 /* button_gallery.png */,
-				4832F0C4186A267E002AA665 /* button_gallery@2x.png */,
-				4832F0C5186A267E002AA665 /* button_share.png */,
-				4832F0C6186A267E002AA665 /* button_share@2x.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		4812FE551835898F0036749C /* Nibs */ = {
@@ -357,7 +331,7 @@
 		4812FDA0183581AA0036749C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Mateusz Dzwonek";
 			};
 			buildConfigurationList = 4812FDA3183581AA0036749C /* Build configuration list for PBXProject "MDSDK" */;
@@ -448,7 +422,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -486,7 +459,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -517,7 +489,6 @@
 		4812FDCC183581AA0036749C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/MDSDK.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
@@ -531,7 +502,6 @@
 		4812FDCD183581AA0036749C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/MDSDK.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
@@ -544,7 +514,6 @@
 		4812FDCF183581AA0036749C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -565,7 +534,6 @@
 		4812FDD0183581AA0036749C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
