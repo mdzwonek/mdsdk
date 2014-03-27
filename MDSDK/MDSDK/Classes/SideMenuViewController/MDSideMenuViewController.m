@@ -328,7 +328,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         }
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         if (menu != nil) {
-            CGFloat translationRatio = translation.x / self.maxContentTranslation;
+            CGFloat translationRatio = (menu == self.leftMenuView ? 1.0f : -1.0f) * translation.x / self.maxContentTranslation;
             translationRatio = menuWillBeVisible ? translationRatio : translationRatio + 1.0f;
             CGFloat animationPercentage = fabs(MIN(MAX(translationRatio, 0.0f), 1.0f));
             [self updateMenu:menu withRevealPercentage:animationPercentage andWillBeVisibleFlag:menuWillBeVisible];
