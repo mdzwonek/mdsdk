@@ -29,6 +29,18 @@
 		4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
 		4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */; };
 		487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */; };
+		48B6252718E43A4900C528E8 /* MDSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDB0183581AA0036749C /* MDSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252818E43A5900C528E8 /* MDAnimatedDotsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDD5183582410036749C /* MDAnimatedDotsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252918E43A5900C528E8 /* MDAnimatedDotsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDD3183582410036749C /* MDAnimatedDotsScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252A18E43A5900C528E8 /* MDDotNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDD8183582410036749C /* MDDotNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252B18E43A5900C528E8 /* MDSideMenuViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDDB183582410036749C /* MDSideMenuViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252C18E43A5900C528E8 /* MDPopupButtonsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4832F0BC186A23D0002AA665 /* MDPopupButtonsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252D18E43A5900C528E8 /* MDLongPressPopupButtonsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252E18E43A5900C528E8 /* MDRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDDF183582410036749C /* MDRandom.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6252F18E43A6A00C528E8 /* UIColor+HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDEF1835824A0036749C /* UIColor+HexColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6253018E43A6A00C528E8 /* UIImage+Tint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4832EAF0186A2EA80075068A /* UIImage+Tint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6253118E43A7400C528E8 /* MDMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 48798CD318C1CC1D00024154 /* MDMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48B6253218E43A9100C528E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4812FDAB183581AA0036749C /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B6253218E43A9100C528E8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +302,27 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		48B6252618E43A3B00C528E8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48B6252718E43A4900C528E8 /* MDSDK.h in Headers */,
+				48B6252818E43A5900C528E8 /* MDAnimatedDotsViewController.h in Headers */,
+				48B6252918E43A5900C528E8 /* MDAnimatedDotsScene.h in Headers */,
+				48B6252A18E43A5900C528E8 /* MDDotNode.h in Headers */,
+				48B6252B18E43A5900C528E8 /* MDSideMenuViewController.h in Headers */,
+				48B6252C18E43A5900C528E8 /* MDPopupButtonsController.h in Headers */,
+				48B6252D18E43A5900C528E8 /* MDLongPressPopupButtonsController.h in Headers */,
+				48B6252E18E43A5900C528E8 /* MDRandom.h in Headers */,
+				48B6253118E43A7400C528E8 /* MDMacros.h in Headers */,
+				48B6252F18E43A6A00C528E8 /* UIColor+HexColor.h in Headers */,
+				48B6253018E43A6A00C528E8 /* UIImage+Tint.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		4812FDA7183581AA0036749C /* MDSDK */ = {
 			isa = PBXNativeTarget;
@@ -297,6 +331,7 @@
 				4812FDA4183581AA0036749C /* Sources */,
 				4812FDA5183581AA0036749C /* Frameworks */,
 				4812FDA6183581AA0036749C /* CopyFiles */,
+				48B6252618E43A3B00C528E8 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -495,6 +530,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/MDSDK;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -507,6 +543,7 @@
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/MDSDK;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
