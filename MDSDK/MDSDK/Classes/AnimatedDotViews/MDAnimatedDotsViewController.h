@@ -12,4 +12,7 @@
 
 @property (nonatomic, strong, readonly) MDAnimatedDotsScene *dotsScene;
 
+- (void)start;
+- (void)stop;
+
 @end

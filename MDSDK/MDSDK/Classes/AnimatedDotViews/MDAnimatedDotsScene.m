@@ -205,15 +205,20 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     self.isFirstRefreshAfterStop = YES;
     [self.motionManager startDeviceMotionUpdatesToQueue:self.motionCallbacksOperationQueue withHandler:^(CMDeviceMotion *motion, NSError *error) {
         UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-        if (orientation == UIDeviceOrientationPortrait) {
-            self.currentVelocity = UIOffsetMake(motion.gravity.x, motion.gravity.y);
-        } else if (orientation == UIDeviceOrientationLandscapeLeft) {
-            self.currentVelocity = UIOffsetMake(-motion.gravity.y, motion.gravity.x);
-        } else if (orientation == UIDeviceOrientationLandscapeRight) {
-            self.currentVelocity = UIOffsetMake(motion.gravity.y, -motion.gravity.x);
-        } else if (orientation == UIDeviceOrientationPortraitUpsideDown) {
-            self.currentVelocity = UIOffsetMake(-motion.gravity.x, -motion.gravity.y);
+        
+        UIApplication *application = [UIApplication sharedApplication];
+        NSUInteger supportedInterfaceOrientations = [application supportedInterfaceOrientationsForWindow:self.view.window];
+        
+        UIOffset velocity = UIOffsetMake(motion.gravity.x, motion.gravity.y);
+        if (orientation == UIDeviceOrientationLandscapeLeft && supportedInterfaceOrientations & UIInterfaceOrientationMaskLandscapeLeft) {
+            velocity.horizontal *= -1;
+        } else if (orientation == UIDeviceOrientationLandscapeRight && supportedInterfaceOrientations & UIInterfaceOrientationMaskLandscapeRight) {
+            velocity.vertical *= -1;
+        } else if (orientation == UIDeviceOrientationPortraitUpsideDown && supportedInterfaceOrientations & UIInterfaceOrientationPortraitUpsideDown) {
+            velocity.horizontal *= -1;
+            velocity.vertical *= -1;
         }
+        self.currentVelocity = velocity;
     }];
     
     [self addActionsToDotNodesIncludingFadeIn:NO];

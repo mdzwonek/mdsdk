@@ -11,7 +11,8 @@
 
 @interface MDAnimatedDotsViewController ()
 
-@property (nonatomic, strong) MDAnimatedDotsScene *dotsScene;
+@property (nonatomic) MDAnimatedDotsScene *dotsScene;
+@property (nonatomic) SKView *skView;
 
 @end
 
@@ -49,30 +50,38 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    SKView *skView;
-    
     if (![self.view isKindOfClass:[SKView class]]) {
-        skView = [[SKView alloc] initWithFrame:self.view.frame];
-        skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.view = skView;
+        self.skView = [[SKView alloc] initWithFrame:self.view.frame];
+        self.skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.view = self.skView;
     } else {
-        skView = (SKView *) self.view;
+        self.skView = (SKView *) self.view;
     }
     
-    self.dotsScene.size = skView.bounds.size;
+    self.dotsScene.size = self.skView.bounds.size;
     
-    if (!skView.scene) {
-        [skView presentScene:self.dotsScene];
+    if (!self.skView.scene) {
+        [self.skView presentScene:self.dotsScene];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.dotsScene start];
+    [self start];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self stop];
+}
+
+- (void)start {
+    self.skView.paused = NO;
+    [self.dotsScene start];
+}
+
+- (void)stop {
+    self.skView.paused = YES;
     [self.dotsScene stop];
 }
 
