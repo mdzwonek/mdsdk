@@ -34,8 +34,8 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 - (BOOL)menuHidden:(UIView *)menu;
 
-- (void)showMenu:(UIView *)menu withCompletion:(void (^)(void))completion;
-- (void)hideMenu:(UIView *)menu withCompletion:(void (^)(void))completion;
+- (void)showMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion;
+- (void)hideMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion;
 
 - (void)didPanToShowMenu:(UIPanGestureRecognizer *)recogniser;
 - (IBAction)didTapMainViewInvisibleLayer:(id)sender;
@@ -73,7 +73,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 - (void)viewDidLoad {
     [self updateCornerRadius];
-
+    
     [self updateMenusFrames];
     
     if (self.leftMenuViewController != nil) {
@@ -94,7 +94,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     self.contentViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
     self.contentViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.contentView insertSubview:self.contentViewController.view belowSubview:self.mainViewTapLayer];
-
+    
     CALayer *mainContentLayer = self.contentView.layer;
     [self updateContentViewShadowRadius];
     [self updateContentViewShadowOpacity];
@@ -192,8 +192,11 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)updateMenusScale {
-    self.leftMenuHidden ? [self hideLeftMenu] : [self showLeftMenu];
-    self.rightMenuHidden ? [self hideRightMenu] : [self showRightMenu];
+    UIView *leftMenu = self.leftMenuView;
+    self.leftMenuHidden ? [self hideMenu:leftMenu animated:NO withCompletion:NULL] : [self showMenu:leftMenu animated:NO withCompletion:NULL];
+    
+    UIView *rightMenu = self.rightMenuView;
+    self.rightMenuHidden ? [self hideMenu:rightMenu animated:NO withCompletion:NULL] : [self showMenu:rightMenu animated:NO withCompletion:NULL];
 }
 
 
@@ -247,7 +250,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)showLeftMenuWithCompletion:(void (^)(void))completion {
-    [self showMenu:self.leftMenuView withCompletion:^{
+    [self showMenu:self.leftMenuView animated:YES withCompletion:^{
         if (self.didToggleLeftMenuBlock) self.didToggleLeftMenuBlock(self);
         if (completion) completion();
     }];
@@ -258,20 +261,27 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)showRightMenuWithCompletion:(void (^)(void))completion {
-    [self showMenu:self.rightMenuView withCompletion:^{
+    [self showMenu:self.rightMenuView animated:YES withCompletion:^{
         if (self.didToggleRightMenuBlock) self.didToggleRightMenuBlock(self);
         if (completion) completion();
     }];
 }
 
-- (void)showMenu:(UIView *)menu withCompletion:(void (^)(void))completion {
-    [self.view insertSubview:menu atIndex:0];
-    [UIView animateWithDuration:self.menuAnimationTime animations:^{
+- (void)showMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion {
+    void (^animations)() = ^{
         [self updateMenu:menu withRevealPercentage:1.0f andWillBeVisibleFlag:YES];
-    } completion:^(BOOL finished) {
+    };
+    void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
         self.mainViewTapLayer.hidden = NO;
         if (completion != NULL) completion();
-    }];
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:self.menuAnimationTime animations:animations completion:animationCompletion];
+    } else {
+        animations();
+        animationCompletion(YES);
+    }
 }
 
 
@@ -282,7 +292,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)hideLeftMenuWithCompletion:(void (^)(void))completion {
-    [self hideMenu:self.leftMenuView withCompletion:^{
+    [self hideMenu:self.leftMenuView animated:YES withCompletion:^{
         if (self.didToggleLeftMenuBlock) self.didToggleLeftMenuBlock(self);
         if (completion) completion();
     }];
@@ -293,20 +303,28 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)hideRightMenuWithCompletion:(void (^)(void))completion {
-    [self hideMenu:self.rightMenuView withCompletion:^{
+    [self hideMenu:self.rightMenuView animated:YES withCompletion:^{
         if (self.didToggleRightMenuBlock) self.didToggleRightMenuBlock(self);
         if (completion) completion();
     }];
 }
 
-- (void)hideMenu:(UIView *)menu withCompletion:(void (^)(void))completion {
-    [UIView animateWithDuration:self.menuAnimationTime animations:^{
+- (void)hideMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion {
+    void (^animations)() = ^{
         [self updateMenu:menu withRevealPercentage:0.0f andWillBeVisibleFlag:NO];
-    } completion:^(BOOL finished) {
+    };
+    void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
         [menu removeFromSuperview];
         self.mainViewTapLayer.hidden = YES;
         if (completion != NULL) completion();
-    }];
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:self.menuAnimationTime animations:animations completion:animationCompletion];
+    } else {
+        animations();
+        animationCompletion(YES);
+    }
 }
 
 
