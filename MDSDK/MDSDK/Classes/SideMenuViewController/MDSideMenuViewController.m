@@ -72,6 +72,8 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     [self updateCornerRadius];
     
     [self updateMenusFrames];
@@ -81,6 +83,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         self.leftMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.leftMenuView.frame), CGRectGetHeight(self.leftMenuView.frame));
         self.leftMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.leftMenuView addSubview:self.leftMenuViewController.view];
+        [self.leftMenuView removeFromSuperview];
     }
     
     if (self.rightMenuViewController != nil) {
@@ -88,7 +91,9 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         self.rightMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.rightMenuView.frame), CGRectGetHeight(self.rightMenuView.frame));
         self.rightMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.rightMenuView addSubview:self.rightMenuViewController.view];
+        [self.rightMenuView removeFromSuperview];
     }
+    
     
     [self addChildViewController:self.contentViewController];
     self.contentViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
@@ -105,15 +110,6 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     
     UIGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanToShowMenu:)];
     [self.view addGestureRecognizer:recognizer];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self updateMenu:self.leftMenuView withRevealPercentage:0.0f andWillBeVisibleFlag:NO];
-    [self updateMenu:self.rightMenuView withRevealPercentage:0.0f andWillBeVisibleFlag:NO];
-    [self.leftMenuView removeFromSuperview];
-    [self.rightMenuView removeFromSuperview];
 }
 
 

@@ -77,11 +77,6 @@ static const CGFloat CORNER_RADIUS = 3.0f;
     
     [self.window makeKeyAndVisible];
     
-    // FIXME: don't know why but sideMenu is not added at the top of self.view subviews
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [rootVC.view bringSubviewToFront:sideMenuVC.view];
-    });
-    
     return YES;
 }
 

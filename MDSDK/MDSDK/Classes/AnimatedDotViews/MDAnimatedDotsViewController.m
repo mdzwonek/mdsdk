@@ -47,22 +47,19 @@
     self.dotsScene.scaleMode = SKSceneScaleModeResizeFill;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.skView = [[SKView alloc] initWithFrame:self.view.frame];
+    self.skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:self.skView];
+    
+    [self.skView presentScene:self.dotsScene];
+}
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    
-    if (![self.view isKindOfClass:[SKView class]]) {
-        self.skView = [[SKView alloc] initWithFrame:self.view.frame];
-        self.skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.view = self.skView;
-    } else {
-        self.skView = (SKView *) self.view;
-    }
-    
     self.dotsScene.size = self.skView.bounds.size;
-    
-    if (!self.skView.scene) {
-        [self.skView presentScene:self.dotsScene];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,6 +73,9 @@
 }
 
 - (void)start {
+    if (!self.skView.paused) {
+        return;
+    }
     self.skView.paused = NO;
     [self.dotsScene start];
 }
