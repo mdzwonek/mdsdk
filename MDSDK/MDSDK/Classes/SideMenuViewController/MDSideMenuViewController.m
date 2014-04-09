@@ -264,6 +264,8 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 }
 
 - (void)showMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion {
+    [self.view insertSubview:menu atIndex:0];
+    
     void (^animations)() = ^{
         [self updateMenu:menu withRevealPercentage:1.0f andWillBeVisibleFlag:YES];
     };
