@@ -277,6 +277,10 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
 }
 
 - (void)generateDotNode {
+    if (self.dotNodes == nil) {
+        return;// not ready yet
+    }
+    
     MDDotNode *dotNode = [[MDDotNode alloc] initWithDiameter:self.dotNodeDiameter()];
     dotNode.position = self.positionForNode(dotNode);
     dotNode.dotColor = self.colorForDotNode(dotNode);
@@ -343,6 +347,8 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     if (context == nil) {
+        CGColorSpaceRelease(colorSpace);
+        CGGradientRelease(gradient);
         return nil;
     }
     
