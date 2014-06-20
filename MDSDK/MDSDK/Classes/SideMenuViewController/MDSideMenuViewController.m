@@ -26,19 +26,19 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 @interface MDSideMenuViewController ()
 
-@property (nonatomic) IBOutlet UIView *contentView;
-@property (nonatomic) IBOutlet UIView *leftMenuView;
-@property (nonatomic) IBOutlet UIView *rightMenuView;
+@property (nonatomic) UIView *contentView;
+@property (nonatomic) UIView *leftMenuView;
+@property (nonatomic) UIView *rightMenuView;
 
-@property (nonatomic) IBOutlet UIView *mainViewTapLayer;
+@property (nonatomic) UIView *mainViewTapLayer;
 
 - (BOOL)menuHidden:(UIView *)menu;
 
 - (void)showMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion;
 - (void)hideMenu:(UIView *)menu animated:(BOOL)animated withCompletion:(void (^)(void))completion;
 
-- (void)didPanToShowMenu:(UIPanGestureRecognizer *)recogniser;
-- (IBAction)didTapMainViewInvisibleLayer:(id)sender;
+- (void)didPanToShowMenu:(UIPanGestureRecognizer *)recognizer;
+- (void)didTapMainViewInvisibleLayer;
 
 - (void)updateMenu:(UIView *)menu withRevealPercentage:(CGFloat)percentage andWillBeVisibleFlag:(BOOL)isShowing;
 - (void)defaultMenuTransformations:(UIView *)menu withRevealPercentage:(CGFloat)percentage andWillBeVisibleFlag:(BOOL)isShowing;
@@ -48,14 +48,9 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
 
 @implementation MDSideMenuViewController
 
-- (id)initWithLeftMenuVC:(UIViewController *)leftMenuVC rightMenuVC:(UIViewController *)rightMenuVC andContentVC:(UIViewController *)contentVC {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     if (self) {
-        NSAssert(leftMenuVC != nil || rightMenuVC != nil, @"At least one of the menu view controllers has to be non-nil");
-        NSAssert(contentVC != nil, @"Content view controller can't be nil");
-        _leftMenuViewController = leftMenuVC;
-        _rightMenuViewController = rightMenuVC;
-        _contentViewController = contentVC;
         self.cornerRadius = MD_SIDE_MENU_VC_DEFAULT_CORNER_RADIUS;
         self.contentViewShadowRadius = MD_SIDE_MENU_VC_DEFAULT_CONTENT_VIEW_SHADOW_RADIUS;
         self.contentViewShadowOpacity = MD_SIDE_MENU_VC_DEFAULT_CONTENT_VIEW_SHADOW_OPACITY;
@@ -67,12 +62,43 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         self.applyMenuTransformations = ^(MDSideMenuViewController *sideMenuVC, UIView *menu, CGFloat percentage, BOOL willBeVisible) {
             [weakSelf defaultMenuTransformations:menu withRevealPercentage:percentage andWillBeVisibleFlag:willBeVisible];
         };
+        [self createViewHierarchyWithFrame:frame];
     }
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)createViewHierarchyWithFrame:(CGRect)frame {
+    self.view = [[UIView alloc] initWithFrame:frame];
+    
+    self.leftMenuView = [[UIView alloc] initWithFrame:frame];
+    self.leftMenuView.clipsToBounds = YES;
+    [self.view addSubview:self.leftMenuView];
+    
+    self.rightMenuView = [[UIView alloc] initWithFrame:frame];
+    self.rightMenuView.clipsToBounds = YES;
+    [self.view addSubview:self.rightMenuView];
+    
+    self.contentView = [[UIView alloc] initWithFrame:frame];
+    [self.view addSubview:self.contentView];
+    
+    self.mainViewTapLayer = [[UIView alloc] initWithFrame:frame];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapMainViewInvisibleLayer)];
+    [self.mainViewTapLayer addGestureRecognizer:recognizer];
+    [self.contentView addSubview:self.mainViewTapLayer];
+    self.mainViewTapLayer.hidden = YES;
+    
+    for (UIView *view in @[ self.view, self.leftMenuView, self.rightMenuView, self.contentView, self.mainViewTapLayer ]) {
+        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        view.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)setupForLeftMenuVC:(UIViewController *)leftMenuVC rightMenuVC:(UIViewController *)rightMenuVC andContentVC:(UIViewController *)contentVC {
+    NSAssert(leftMenuVC != nil || rightMenuVC != nil, @"At least one of the menu view controllers has to be non-nil");
+    NSAssert(contentVC != nil, @"Content view controller can't be nil");
+    _leftMenuViewController = leftMenuVC;
+    _rightMenuViewController = rightMenuVC;
+    _contentViewController = contentVC;
     
     [self updateCornerRadius];
     
@@ -93,7 +119,6 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         [self.rightMenuView addSubview:self.rightMenuViewController.view];
         [self.rightMenuView removeFromSuperview];
     }
-    
     
     [self addChildViewController:self.contentViewController];
     self.contentViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
@@ -368,7 +393,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     }
 }
 
-- (IBAction)didTapMainViewInvisibleLayer:(id)sender {
+- (void)didTapMainViewInvisibleLayer {
     if (!self.leftMenuHidden) {
         [self hideLeftMenu];
     } else if (!self.rightMenuHidden) {

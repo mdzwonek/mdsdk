@@ -45,7 +45,9 @@ extern const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE;
 @property (nonatomic, copy) void (^didToggleRightMenuBlock)(MDSideMenuViewController *sideMenuVC);
 @property (nonatomic, copy) void (^applyMenuTransformations)(MDSideMenuViewController *sideMenuVC, UIView *menu, CGFloat percentage, BOOL willBeVisible);
 
-- (id)initWithLeftMenuVC:(UIViewController *)leftMenuVC rightMenuVC:(UIViewController *)rightMenuVC andContentVC:(UIViewController *)contentVC;
+- (instancetype)initWithFrame:(CGRect)frame;
+
+- (void)setupForLeftMenuVC:(UIViewController *)leftMenuVC rightMenuVC:(UIViewController *)rightMenuVC andContentVC:(UIViewController *)contentVC;
 
 - (void)toggleLeftMenu;
 - (void)showLeftMenu;

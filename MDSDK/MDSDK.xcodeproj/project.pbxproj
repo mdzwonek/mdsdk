@@ -24,7 +24,6 @@
 		4812FDEC183582410036749C /* MDRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDE0183582410036749C /* MDRandom.m */; };
 		4812FDF11835824A0036749C /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDF01835824A0036749C /* UIColor+HexColor.m */; };
 		4812FDF21835824A0036749C /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDF01835824A0036749C /* UIColor+HexColor.m */; };
-		4812FE5A1835898F0036749C /* MDSideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4812FE571835898F0036749C /* MDSideMenuViewController.xib */; };
 		4832EAF2186A2EA80075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
 		4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
 		4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */; };
@@ -92,7 +91,6 @@
 		4812FDF71835827C0036749C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		4812FDF9183582880036749C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4812FDFB183582AE0036749C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		4812FE571835898F0036749C /* MDSideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDSideMenuViewController.xib; sourceTree = "<group>"; };
 		4832EAF0186A2EA80075068A /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "Classes/UIImage+Tint.h"; sourceTree = "<group>"; };
 		4832EAF1186A2EA80075068A /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "Classes/UIImage+Tint.m"; sourceTree = "<group>"; };
 		4832F0BC186A23D0002AA665 /* MDPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDPopupButtonsController.h; path = LongPressPopupButtonsController/MDPopupButtonsController.h; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				4812FDB0183581AA0036749C /* MDSDK.h */,
 				4812FDD1183582410036749C /* Classes */,
 				4812FDED1835824A0036749C /* Libraries */,
-				4812FE511835898F0036749C /* Resources */,
 				4812FDAE183581AA0036749C /* Supporting Files */,
 			);
 			path = MDSDK;
@@ -254,30 +251,6 @@
 				4812FDF01835824A0036749C /* UIColor+HexColor.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		4812FE511835898F0036749C /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4812FE551835898F0036749C /* Nibs */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		4812FE551835898F0036749C /* Nibs */ = {
-			isa = PBXGroup;
-			children = (
-				4812FE561835898F0036749C /* SideMenuViewController */,
-			);
-			path = Nibs;
-			sourceTree = "<group>";
-		};
-		4812FE561835898F0036749C /* SideMenuViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4812FE571835898F0036749C /* MDSideMenuViewController.xib */,
-			);
-			path = SideMenuViewController;
 			sourceTree = "<group>";
 		};
 		4832F0E1186A2C9F002AA665 /* MGImageUtilities */ = {
@@ -392,7 +365,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4812FE5A1835898F0036749C /* MDSideMenuViewController.xib in Resources */,
 				4812FDC6183581AA0036749C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
