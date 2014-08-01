@@ -13,6 +13,7 @@
 
 @property (nonatomic) MDAnimatedDotsScene *dotsScene;
 @property (nonatomic) SKView *skView;
+@property (nonatomic) BOOL isStarted;
 
 @end
 
@@ -45,6 +46,7 @@
 - (void)initialize {
     self.dotsScene = [[MDAnimatedDotsScene alloc] init];
     self.dotsScene.scaleMode = SKSceneScaleModeResizeFill;
+    self.isStarted = NO;
 }
 
 - (void)viewDidLoad {
@@ -78,11 +80,13 @@
     }
     self.skView.paused = NO;
     [self.dotsScene start];
+    self.isStarted = YES;
 }
 
 - (void)stop {
     self.skView.paused = YES;
     [self.dotsScene stop];
+    self.isStarted = NO;
 }
 
 @end

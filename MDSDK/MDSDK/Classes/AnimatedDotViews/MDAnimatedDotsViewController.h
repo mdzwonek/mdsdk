@@ -11,6 +11,7 @@
 @interface MDAnimatedDotsViewController : UIViewController
 
 @property (nonatomic, strong, readonly) MDAnimatedDotsScene *dotsScene;
+@property (nonatomic, readonly) BOOL isStarted;
 
 - (void)start;
 - (void)stop;
