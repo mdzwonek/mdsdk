@@ -52,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.skView = [[SKView alloc] initWithFrame:self.view.frame];
+    self.skView = [[SKView alloc] initWithFrame:self.view.bounds];
     self.skView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:self.skView];
     
