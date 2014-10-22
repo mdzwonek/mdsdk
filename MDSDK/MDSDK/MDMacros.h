@@ -9,6 +9,9 @@
 #ifndef MDSDK_MDMacros_h
 #define MDSDK_MDMacros_h
 
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+
 #define UIOffsetAdd(firstOffset, secondOffset) UIOffsetMake(firstOffset.horizontal + secondOffset.horizontal, firstOffset.vertical + secondOffset.vertical)
 #define UIOffsetMultiply(offset, multiplier) UIOffsetMake(multiplier * offset.horizontal, multiplier * offset.vertical)
 #define UIOffsetSubstract(firstOffset, secondOffset) UIOffsetAdd(firstOffset, UIOffsetMultiply(secondOffset, -1.0f))

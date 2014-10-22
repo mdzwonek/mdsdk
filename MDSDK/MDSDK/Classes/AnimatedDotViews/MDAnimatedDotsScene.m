@@ -13,9 +13,9 @@
 #import "UIColor+HexColor.h"
 
 #define TOTAL_NUMBER_OF_DOTS (CANVAS_WIDTH_MULTIPLIER * CANVAS_HEIGHT_MULTIPLIER * self.numberOfDots())
+// The bigger screen, the more dots; 7 dots for 3.5 inch screen.
+#define DEFAULT_NUMBER_OF_DOTS_ON_SCREEN ((NSInteger) ((SCREEN_WIDTH * SCREEN_HEIGHT) * 7.0f / (320.0f * 480.0f)))
 
-
-static const NSInteger DEFAULT_NUMBER_OF_DOTS_ON_SCREEN = 7;
 
 static const NSInteger CANVAS_WIDTH_MULTIPLIER  = 2;
 static const NSInteger CANVAS_HEIGHT_MULTIPLIER = 2;
