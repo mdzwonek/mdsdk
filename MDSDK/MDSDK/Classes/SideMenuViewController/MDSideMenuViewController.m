@@ -109,6 +109,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         self.leftMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.leftMenuView.frame), CGRectGetHeight(self.leftMenuView.frame));
         self.leftMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.leftMenuView addSubview:self.leftMenuViewController.view];
+        [self.leftMenuViewController didMoveToParentViewController:self];
         [self.leftMenuView removeFromSuperview];
     }
     
@@ -117,6 +118,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
         self.rightMenuViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.rightMenuView.frame), CGRectGetHeight(self.rightMenuView.frame));
         self.rightMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.rightMenuView addSubview:self.rightMenuViewController.view];
+        [self.rightMenuViewController didMoveToParentViewController:self];
         [self.rightMenuView removeFromSuperview];
     }
     
@@ -124,6 +126,7 @@ const CGFloat MD_SIDE_MENU_VC_DEFAULT_MAX_MENU_SCALE = 1.0f;
     self.contentViewController.view.frame = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.contentView.frame), CGRectGetHeight(self.contentView.frame));
     self.contentViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.contentView insertSubview:self.contentViewController.view belowSubview:self.mainViewTapLayer];
+    [self.contentViewController didMoveToParentViewController:self];
     
     CALayer *mainContentLayer = self.contentView.layer;
     [self updateContentViewShadowRadius];
