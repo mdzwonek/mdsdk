@@ -18,6 +18,8 @@
     #import "MDPopupButtonsController.h"
     #import "MDLongPressPopupButtonsController.h"
 
+    #import "MDBlockDelegateActionSheet.h"
+    #import "MDBlockDelegateAlertView.h"
     #import "MDRandom.h"
 
     #import "UIColor+HexColor.h"

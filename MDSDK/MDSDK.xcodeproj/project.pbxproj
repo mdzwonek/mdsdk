@@ -40,6 +40,12 @@
 		48B6253018E43A6A00C528E8 /* UIImage+Tint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4832EAF0186A2EA80075068A /* UIImage+Tint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B6253118E43A7400C528E8 /* MDMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 48798CD318C1CC1D00024154 /* MDMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B6253218E43A9100C528E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4812FDAB183581AA0036749C /* Foundation.framework */; };
+		48E62D491A58640F00B944CE /* MDBlockDelegateActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E62D451A58640F00B944CE /* MDBlockDelegateActionSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48E62D4A1A58640F00B944CE /* MDBlockDelegateActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E62D461A58640F00B944CE /* MDBlockDelegateActionSheet.m */; };
+		48E62D4B1A58640F00B944CE /* MDBlockDelegateAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 48E62D471A58640F00B944CE /* MDBlockDelegateAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48E62D4C1A58640F00B944CE /* MDBlockDelegateAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E62D481A58640F00B944CE /* MDBlockDelegateAlertView.m */; };
+		48E62D4D1A58641500B944CE /* MDBlockDelegateActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E62D461A58640F00B944CE /* MDBlockDelegateActionSheet.m */; };
+		48E62D4E1A58641500B944CE /* MDBlockDelegateAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E62D481A58640F00B944CE /* MDBlockDelegateAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +104,10 @@
 		48798CD318C1CC1D00024154 /* MDMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMacros.h; sourceTree = "<group>"; };
 		487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDLongPressPopupButtonsController.h; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.h; sourceTree = "<group>"; };
 		487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDLongPressPopupButtonsController.m; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.m; sourceTree = "<group>"; };
+		48E62D451A58640F00B944CE /* MDBlockDelegateActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBlockDelegateActionSheet.h; sourceTree = "<group>"; };
+		48E62D461A58640F00B944CE /* MDBlockDelegateActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDBlockDelegateActionSheet.m; sourceTree = "<group>"; };
+		48E62D471A58640F00B944CE /* MDBlockDelegateAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBlockDelegateAlertView.h; sourceTree = "<group>"; };
+		48E62D481A58640F00B944CE /* MDBlockDelegateAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDBlockDelegateAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +239,10 @@
 		4812FDDE183582410036749C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				48E62D451A58640F00B944CE /* MDBlockDelegateActionSheet.h */,
+				48E62D461A58640F00B944CE /* MDBlockDelegateActionSheet.m */,
+				48E62D471A58640F00B944CE /* MDBlockDelegateAlertView.h */,
+				48E62D481A58640F00B944CE /* MDBlockDelegateAlertView.m */,
 				4812FDDF183582410036749C /* MDRandom.h */,
 				4812FDE0183582410036749C /* MDRandom.m */,
 			);
@@ -288,6 +302,8 @@
 				48B6252C18E43A5900C528E8 /* MDPopupButtonsController.h in Headers */,
 				48B6252D18E43A5900C528E8 /* MDLongPressPopupButtonsController.h in Headers */,
 				48B6252E18E43A5900C528E8 /* MDRandom.h in Headers */,
+				48E62D4B1A58640F00B944CE /* MDBlockDelegateAlertView.h in Headers */,
+				48E62D491A58640F00B944CE /* MDBlockDelegateActionSheet.h in Headers */,
 				48B6253118E43A7400C528E8 /* MDMacros.h in Headers */,
 				48B6252F18E43A6A00C528E8 /* UIColor+HexColor.h in Headers */,
 				48B6253018E43A6A00C528E8 /* UIImage+Tint.h in Headers */,
@@ -382,6 +398,8 @@
 				4812FDE1183582410036749C /* MDAnimatedDotsScene.m in Sources */,
 				487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */,
 				4812FDE8183582410036749C /* MDSideMenuViewController.m in Sources */,
+				48E62D4C1A58640F00B944CE /* MDBlockDelegateAlertView.m in Sources */,
+				48E62D4A1A58640F00B944CE /* MDBlockDelegateActionSheet.m in Sources */,
 				4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */,
 				4812FDE3183582410036749C /* MDAnimatedDotsViewController.m in Sources */,
 				4812FDEB183582410036749C /* MDRandom.m in Sources */,
@@ -394,10 +412,12 @@
 			files = (
 				4812FDF21835824A0036749C /* UIColor+HexColor.m in Sources */,
 				4812FDE7183582410036749C /* MDDotNode.m in Sources */,
+				48E62D4E1A58641500B944CE /* MDBlockDelegateAlertView.m in Sources */,
 				4812FDE2183582410036749C /* MDAnimatedDotsScene.m in Sources */,
 				4812FDE9183582410036749C /* MDSideMenuViewController.m in Sources */,
 				4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */,
 				4812FDE4183582410036749C /* MDAnimatedDotsViewController.m in Sources */,
+				48E62D4D1A58641500B944CE /* MDBlockDelegateActionSheet.m in Sources */,
 				4812FDC8183581AA0036749C /* MDSDKTests.m in Sources */,
 				4812FDEC183582410036749C /* MDRandom.m in Sources */,
 			);
