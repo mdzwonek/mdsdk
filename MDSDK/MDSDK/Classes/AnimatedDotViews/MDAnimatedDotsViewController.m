@@ -89,4 +89,8 @@
     self.isStarted = NO;
 }
 
+- (void)reset {
+    [self.dotsScene reset];
+}
+
 @end

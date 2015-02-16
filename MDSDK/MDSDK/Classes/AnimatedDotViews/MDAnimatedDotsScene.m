@@ -236,6 +236,10 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     [self removeActionsFromDotNodes];
 }
 
+- (void)reset {
+    [self removeDotNodes];
+}
+
 
 #pragma mark - Executing the Animation Loop
 
@@ -327,6 +331,11 @@ static const double DOT_FADE_ANIMATION_PERCENTAGE = 0.2;
     for (MDDotNode *dotNode in self.dotNodes) {
         [dotNode removeAllActions];
     }
+}
+
+- (void)removeDotNodes {
+    [self removeChildrenInArray:self.dotNodes];
+    self.dotNodes = [NSMutableArray new];
 }
 
 

@@ -28,6 +28,7 @@
 
 - (void)start;
 - (void)stop;
+- (void)reset;
 
 - (void)refreshUIWithBackgroundChangeDuration:(NSTimeInterval)backgroundDuration andDotsChangeDuration:(NSTimeInterval)dotsDuration;
 
