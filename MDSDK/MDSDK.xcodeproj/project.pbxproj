@@ -24,10 +24,14 @@
 		4812FDEC183582410036749C /* MDRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDE0183582410036749C /* MDRandom.m */; };
 		4812FDF11835824A0036749C /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDF01835824A0036749C /* UIColor+HexColor.m */; };
 		4812FDF21835824A0036749C /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4812FDF01835824A0036749C /* UIColor+HexColor.m */; };
+		4820B6E51AABB91C00B2183B /* UIColor+Equal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4820B6E31AABB91C00B2183B /* UIColor+Equal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4820B6E61AABB91C00B2183B /* UIColor+Equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4820B6E41AABB91C00B2183B /* UIColor+Equal.m */; };
 		4832EAF2186A2EA80075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
 		4832EAF3186A2EAE0075068A /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832EAF1186A2EA80075068A /* UIImage+Tint.m */; };
 		4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4832F0BD186A23D0002AA665 /* MDPopupButtonsController.m */; };
 		487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */; };
+		4895A77E1AAAFE9A00B202B2 /* MDColorPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4895A77C1AAAFE9A00B202B2 /* MDColorPickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4895A77F1AAAFE9A00B202B2 /* MDColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4895A77D1AAAFE9A00B202B2 /* MDColorPickerView.m */; };
 		48B6252718E43A4900C528E8 /* MDSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDB0183581AA0036749C /* MDSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B6252818E43A5900C528E8 /* MDAnimatedDotsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDD5183582410036749C /* MDAnimatedDotsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48B6252918E43A5900C528E8 /* MDAnimatedDotsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 4812FDD3183582410036749C /* MDAnimatedDotsScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -97,6 +101,8 @@
 		4812FDF71835827C0036749C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		4812FDF9183582880036749C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4812FDFB183582AE0036749C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		4820B6E31AABB91C00B2183B /* UIColor+Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Equal.h"; path = "ColorPickerView/UIColor+Equal.h"; sourceTree = "<group>"; };
+		4820B6E41AABB91C00B2183B /* UIColor+Equal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Equal.m"; path = "ColorPickerView/UIColor+Equal.m"; sourceTree = "<group>"; };
 		4832EAF0186A2EA80075068A /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "Classes/UIImage+Tint.h"; sourceTree = "<group>"; };
 		4832EAF1186A2EA80075068A /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "Classes/UIImage+Tint.m"; sourceTree = "<group>"; };
 		4832F0BC186A23D0002AA665 /* MDPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDPopupButtonsController.h; path = LongPressPopupButtonsController/MDPopupButtonsController.h; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 		48798CD318C1CC1D00024154 /* MDMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMacros.h; sourceTree = "<group>"; };
 		487F3A7418467DC800130741 /* MDLongPressPopupButtonsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDLongPressPopupButtonsController.h; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.h; sourceTree = "<group>"; };
 		487F3A7518467DC800130741 /* MDLongPressPopupButtonsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDLongPressPopupButtonsController.m; path = LongPressPopupButtonsController/MDLongPressPopupButtonsController.m; sourceTree = "<group>"; };
+		4895A77C1AAAFE9A00B202B2 /* MDColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDColorPickerView.h; path = ColorPickerView/MDColorPickerView.h; sourceTree = "<group>"; };
+		4895A77D1AAAFE9A00B202B2 /* MDColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDColorPickerView.m; path = ColorPickerView/MDColorPickerView.m; sourceTree = "<group>"; };
 		48E62D451A58640F00B944CE /* MDBlockDelegateActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBlockDelegateActionSheet.h; sourceTree = "<group>"; };
 		48E62D461A58640F00B944CE /* MDBlockDelegateActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDBlockDelegateActionSheet.m; sourceTree = "<group>"; };
 		48E62D471A58640F00B944CE /* MDBlockDelegateAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBlockDelegateAlertView.h; sourceTree = "<group>"; };
@@ -209,6 +217,7 @@
 				4812FDD2183582410036749C /* AnimatedDotViews */,
 				4812FDDA183582410036749C /* SideMenuViewController */,
 				487F3A7318467D7100130741 /* LongPressPopupButtonsController */,
+				4895A77B1AAAFE6800B202B2 /* ColorPickerView */,
 				4812FDDE183582410036749C /* Utils */,
 			);
 			path = Classes;
@@ -287,6 +296,17 @@
 			name = LongPressPopupButtonsController;
 			sourceTree = "<group>";
 		};
+		4895A77B1AAAFE6800B202B2 /* ColorPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				4895A77C1AAAFE9A00B202B2 /* MDColorPickerView.h */,
+				4895A77D1AAAFE9A00B202B2 /* MDColorPickerView.m */,
+				4820B6E31AABB91C00B2183B /* UIColor+Equal.h */,
+				4820B6E41AABB91C00B2183B /* UIColor+Equal.m */,
+			);
+			name = ColorPickerView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -294,6 +314,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4895A77E1AAAFE9A00B202B2 /* MDColorPickerView.h in Headers */,
 				48B6252718E43A4900C528E8 /* MDSDK.h in Headers */,
 				48B6252818E43A5900C528E8 /* MDAnimatedDotsViewController.h in Headers */,
 				48B6252918E43A5900C528E8 /* MDAnimatedDotsScene.h in Headers */,
@@ -305,6 +326,7 @@
 				48E62D4B1A58640F00B944CE /* MDBlockDelegateAlertView.h in Headers */,
 				48E62D491A58640F00B944CE /* MDBlockDelegateActionSheet.h in Headers */,
 				48B6253118E43A7400C528E8 /* MDMacros.h in Headers */,
+				4820B6E51AABB91C00B2183B /* UIColor+Equal.h in Headers */,
 				48B6252F18E43A6A00C528E8 /* UIColor+HexColor.h in Headers */,
 				48B6253018E43A6A00C528E8 /* UIImage+Tint.h in Headers */,
 			);
@@ -395,9 +417,11 @@
 				4832EAF2186A2EA80075068A /* UIImage+Tint.m in Sources */,
 				4812FDF11835824A0036749C /* UIColor+HexColor.m in Sources */,
 				4812FDE6183582410036749C /* MDDotNode.m in Sources */,
+				4895A77F1AAAFE9A00B202B2 /* MDColorPickerView.m in Sources */,
 				4812FDE1183582410036749C /* MDAnimatedDotsScene.m in Sources */,
 				487F3A7618467DC800130741 /* MDLongPressPopupButtonsController.m in Sources */,
 				4812FDE8183582410036749C /* MDSideMenuViewController.m in Sources */,
+				4820B6E61AABB91C00B2183B /* UIColor+Equal.m in Sources */,
 				48E62D4C1A58640F00B944CE /* MDBlockDelegateAlertView.m in Sources */,
 				48E62D4A1A58640F00B944CE /* MDBlockDelegateActionSheet.m in Sources */,
 				4832F0BE186A23D0002AA665 /* MDPopupButtonsController.m in Sources */,
