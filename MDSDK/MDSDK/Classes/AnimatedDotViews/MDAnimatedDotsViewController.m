@@ -75,9 +75,6 @@
 }
 
 - (void)start {
-    if (!self.skView.paused) {
-        return;
-    }
     self.skView.paused = NO;
     [self.dotsScene start];
     self.isStarted = YES;
