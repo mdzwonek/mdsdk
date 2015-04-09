@@ -23,6 +23,8 @@ typedef float (^MDReverseColorGenerator)(UIColor *color);
 @property (nonatomic) UIColor *indicatorViewBorderColor;
 @property (nonatomic, copy) MDColorGenerator colorGenerator;
 
+@property (nonatomic, readonly) UIView *indicatorView;
+
 @property (nonatomic, weak) id<MDColorPickerViewDelegate> delegate;
 
 - (void)setColor:(UIColor *)color withReverseColorGenerator:(MDReverseColorGenerator)reverseColorGenerator;

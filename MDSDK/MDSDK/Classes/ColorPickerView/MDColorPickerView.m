@@ -91,7 +91,7 @@ static const CGFloat MDGradientViewColorTolerance = 0.01f;
 
 - (void)drawGradientInContext:(CGContextRef)context rect:(CGRect)rect interpolationBlockCount:(NSInteger)interpolationBlockCount {
     CGPoint center = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
-    CGFloat radius = MIN(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2.0f;
+    CGFloat radius = MIN(CGRectGetWidth(rect), CGRectGetHeight(rect)) / 2.0f - 1.0f;// -1 to make sure that the gradient fits inside of the view
     CGFloat innerRadius = _innerRadiusMultiplier * radius;
     CGFloat outerRadius = _outerRadiusMultiplier * radius;
 
