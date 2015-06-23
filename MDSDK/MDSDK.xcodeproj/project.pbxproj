@@ -377,7 +377,7 @@
 		4812FDA0183581AA0036749C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Mateusz Dzwonek";
 			};
 			buildConfigurationList = 4812FDA3183581AA0036749C /* Build configuration list for PBXProject "MDSDK" */;
@@ -486,6 +486,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -579,6 +580,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MDSDKTests/MDSDKTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mdzwonek.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -595,6 +597,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDSDK/MDSDK-Prefix.pch";
 				INFOPLIST_FILE = "MDSDKTests/MDSDKTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mdzwonek.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
